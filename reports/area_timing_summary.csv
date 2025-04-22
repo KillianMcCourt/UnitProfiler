@@ -1,0 +1,2 @@
+Operator,Bitwidth,Frequency_MHz,Converters,Slack_ns,LUTs,Registers,DSPs,BRAMs,SRLs
+Multiplier,32,300,noIO,0.524,0,153,1,0,0

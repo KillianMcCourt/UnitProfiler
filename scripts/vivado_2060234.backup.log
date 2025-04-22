@@ -1,0 +1,335 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Apr 22 21:38:42 2025
+# Process ID: 2060234
+# Current directory: /home/kmccourt/unit_profiler/scripts
+# Command line: vivado -mode batch -source operator.tcl
+# Log file: /home/kmccourt/unit_profiler/scripts/vivado.log
+# Journal file: /home/kmccourt/unit_profiler/scripts/vivado.jou
+# Running On: ee-tik-dynamo-eda1, OS: Linux, CPU Frequency: 3600.000 MHz, CPU Physical cores: 32, Host memory: 624283 MB
+#-----------------------------------------------------------
+source operator.tcl
+# set unit_name $env(UNIT_NAME)
+# set clock_period $env(CLOCK_PERIOD)
+# set unit_dir $env(UNIT_DIR)
+# set report_dir $env(REPORT_DIR)
+# set dir_name [file tail $unit_dir]
+# puts "Processing directory: $dir_name"
+Processing directory: FloatingPointDivider_64_100_noOUT
+# if {[regexp {FloatingPoint([A-Za-z]+)_([0-9]+)_([0-9]+)_([A-Za-z]+)} $dir_name -> operator bitwidth frequency converters]} {
+#     puts "Extracted info:"
+#     puts "  Operator: $operator"
+#     puts "  Bitwidth: $bitwidth"
+#     puts "  Frequency: ${frequency}MHz"
+#     puts "  Converters: $converters"
+# } else {
+#     puts "ERROR: Could not parse directory name format: $dir_name"
+#     exit 1
+# }
+Extracted info:
+  Operator: Divider
+  Bitwidth: 64
+  Frequency: 100MHz
+  Converters: noOUT
+# file mkdir $report_dir/utilization
+# file mkdir $report_dir/timing
+# puts "Top module: $unit_name"
+Top module: fdiv_op
+# puts "Clock period: $clock_period ns"
+Clock period: 10.00000000000000000000 ns
+# puts "Reading dependency files from ./dependencies directory..."
+Reading dependency files from ./dependencies directory...
+# set dependency_dir "../dependencies"
+# if {[file exists $dependency_dir]} {
+#     set dependency_files [glob -nocomplain "$dependency_dir/*.vhd"]
+#     if {[llength $dependency_files] > 0} {
+#         puts "Found [llength $dependency_files] dependency files"
+#         foreach dep_file $dependency_files {
+#             puts "Reading dependency file: $dep_file"
+#             read_vhdl -vhdl2008 $dep_file
+#         }
+#     } else {
+#         puts "WARNING: No dependency files found in $dependency_dir"
+#     }
+# } else {
+#     puts "WARNING: Dependencies directory not found: $dependency_dir"
+# }
+Found 12 dependency files
+Reading dependency file: ../dependencies/delay_buffer.vhd
+Reading dependency file: ../dependencies/eager_fork_register_block.vhd
+Reading dependency file: ../dependencies/flopoco_ip_cores.vhd
+Reading dependency file: ../dependencies/join.vhd
+Reading dependency file: ../dependencies/logic.vhd
+Reading dependency file: ../dependencies/mc_support.vhd
+Reading dependency file: ../dependencies/mem_to_bram.vhd
+Reading dependency file: ../dependencies/sharing_support.vhd
+Reading dependency file: ../dependencies/types.vhd
+Reading dependency file: ../dependencies/elastic_fifo_inner.vhd
+Reading dependency file: ../dependencies/merge_notehb.vhd
+Reading dependency file: ../dependencies/oehb.vhd
+# puts "Reading VHDL files from: $unit_dir"
+Reading VHDL files from: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointDivider_64_100_noOUT
+# set vhdl_files [list]
+# lappend vhdl_files "$unit_dir/operator.vhd"
+# lappend vhdl_files "$unit_dir/wrapper.vhd"
+# puts "VHDL files to process: $vhdl_files"
+VHDL files to process: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointDivider_64_100_noOUT/wrapper.vhd
+# foreach vhdl_file $vhdl_files {
+#     puts "Reading VHDL file: $vhdl_file"
+#     read_vhdl -vhdl2008 $vhdl_file
+# }
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointDivider_64_100_noOUT/wrapper.vhd
+# puts "Synthesizing design with top module: $unit_name"
+Synthesizing design with top module: fdiv_op
+# synth_design -top $unit_name -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
+Command: synth_design -top fdiv_op -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7v585t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7v585t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2060983
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2029.133 ; gain = 413.652 ; free physical = 409090 ; free virtual = 501649
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-9871] overwriting existing primary unit 'floatingpointdivider' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:575]
+INFO: [Synth 8-638] synthesizing module 'fdiv_op' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/wrapper.vhd:33]
+INFO: [Synth 8-638] synthesizing module '\join ' [/home/kmccourt/unit_profiler/dependencies/join.vhd:18]
+	Parameter SIZE bound to: 2 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'and_n' [/home/kmccourt/unit_profiler/dependencies/logic.vhd:16]
+	Parameter SIZE bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'and_n' (0#1) [/home/kmccourt/unit_profiler/dependencies/logic.vhd:16]
+INFO: [Synth 8-256] done synthesizing module '\join ' (0#1) [/home/kmccourt/unit_profiler/dependencies/join.vhd:18]
+INFO: [Synth 8-638] synthesizing module 'delay_buffer' [/home/kmccourt/unit_profiler/dependencies/delay_buffer.vhd:16]
+	Parameter SIZE bound to: 5 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'delay_buffer' (0#1) [/home/kmccourt/unit_profiler/dependencies/delay_buffer.vhd:16]
+INFO: [Synth 8-638] synthesizing module 'oehb_dataless' [/home/kmccourt/unit_profiler/dependencies/oehb.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'oehb_dataless' (0#1) [/home/kmccourt/unit_profiler/dependencies/oehb.vhd:17]
+INFO: [Synth 8-638] synthesizing module 'InputIEEE_64bit' [/home/kmccourt/unit_profiler/dependencies/flopoco_ip_cores.vhd:3739]
+INFO: [Synth 8-256] done synthesizing module 'InputIEEE_64bit' (0#1) [/home/kmccourt/unit_profiler/dependencies/flopoco_ip_cores.vhd:3739]
+INFO: [Synth 8-638] synthesizing module 'FloatingPointDivider' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:582]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable28' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1096]
+INFO: [Synth 8-638] synthesizing module 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:27]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:28]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'selFunction_Freq100_uid4' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:27]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable27' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1113]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable26' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1130]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable25' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1147]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable24' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1164]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable23' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1181]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable22' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1198]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable21' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1215]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable20' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1232]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable19' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1249]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable18' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1266]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable17' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1283]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable16' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1300]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable15' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1317]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable14' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1334]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable13' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1351]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable12' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1368]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable11' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1385]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable10' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1402]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable9' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1419]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable8' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1436]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable7' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1453]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable6' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1470]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable5' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1487]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable4' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1504]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable3' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1521]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable2' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1538]
+INFO: [Synth 8-3491] module 'selFunction_Freq100_uid4' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:22' bound to instance 'SelFunctionTable1' of component 'selFunction_Freq100_uid4' [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1555]
+INFO: [Synth 8-256] done synthesizing module 'FloatingPointDivider' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:582]
+INFO: [Synth 8-256] done synthesizing module 'fdiv_op' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/wrapper.vhd:33]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w0_c6_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1567]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w1_c6_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1550]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w2_c5_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1533]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w3_c5_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1516]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w4_c5_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1499]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w5_c5_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1482]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w6_c4_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1465]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w7_c4_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1448]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w8_c4_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1431]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w9_c4_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1414]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w10_c4_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1397]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w11_c3_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1380]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w12_c3_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1363]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w13_c3_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1346]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w14_c3_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1329]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w15_c2_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1312]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w16_c2_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1295]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w17_c2_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1278]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w18_c2_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1261]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w19_c2_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1244]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w20_c1_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1227]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w21_c1_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1210]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w22_c1_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1193]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w23_c1_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1176]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w24_c0_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1159]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w25_c0_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1142]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w26_c0_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1125]
+WARNING: [Synth 8-3936] Found unconnected internal register 'w27_c0_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1108]
+WARNING: [Synth 8-6014] Unused sequential element qM28_c1_reg was removed.  [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:846]
+WARNING: [Synth 8-6014] Unused sequential element qM28_c2_reg was removed.  [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:865]
+WARNING: [Synth 8-6014] Unused sequential element qM28_c3_reg was removed.  [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:891]
+WARNING: [Synth 8-6014] Unused sequential element qM28_c4_reg was removed.  [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:926]
+WARNING: [Synth 8-6014] Unused sequential element qM28_c5_reg was removed.  [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:970]
+WARNING: [Synth 8-6014] Unused sequential element qM28_c6_reg was removed.  [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1023]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2123.070 ; gain = 507.590 ; free physical = 409173 ; free virtual = 501733
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2137.914 ; gain = 522.434 ; free physical = 409164 ; free virtual = 501724
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7v585tffg1157-1
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7v585tffg1157-1
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2145.918 ; gain = 530.438 ; free physical = 409162 ; free virtual = 501723
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'qP28_c6_reg' and it is trimmed from '2' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1022]
+WARNING: [Synth 8-3936] Found unconnected internal register 'qP28_c5_reg' and it is trimmed from '2' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:969]
+WARNING: [Synth 8-3936] Found unconnected internal register 'qP28_c4_reg' and it is trimmed from '2' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:925]
+WARNING: [Synth 8-3936] Found unconnected internal register 'qP28_c3_reg' and it is trimmed from '2' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:890]
+WARNING: [Synth 8-3936] Found unconnected internal register 'qP28_c2_reg' and it is trimmed from '2' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:864]
+WARNING: [Synth 8-3936] Found unconnected internal register 'qP28_c1_reg' and it is trimmed from '2' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:845]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2180.441 ; gain = 564.961 ; free physical = 409124 ; free virtual = 501686
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   65 Bit       Adders := 1     
+	   3 Input   55 Bit       Adders := 1     
+	   3 Input   54 Bit       Adders := 28    
+	   3 Input   13 Bit       Adders := 1     
+	   2 Input   13 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               56 Bit    Registers := 10    
+	               53 Bit    Registers := 6     
+	               13 Bit    Registers := 6     
+	                3 Bit    Registers := 6     
+	                2 Bit    Registers := 182   
+	                1 Bit    Registers := 18    
++---Muxes : 
+	   3 Input   56 Bit        Muxes := 4     
+	   2 Input   54 Bit        Muxes := 28    
+	   3 Input   54 Bit        Muxes := 24    
+	   2 Input   53 Bit        Muxes := 1     
+	   2 Input   52 Bit        Muxes := 2     
+	   2 Input    2 Bit        Muxes := 4     
+	   4 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1260 (col length:180)
+BRAMs: 1590 (col length: RAMB18 180 RAMB36 90)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-3936] Found unconnected internal register 'absq20D_c2_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:863]
+WARNING: [Synth 8-3936] Found unconnected internal register 'absq11D_c4_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:924]
+WARNING: [Synth 8-3936] Found unconnected internal register 'absq2D_c6_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:1021]
+WARNING: [Synth 8-3936] Found unconnected internal register 'absq24D_c1_reg' and it is trimmed from '56' to '54' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointDivider_64_100_noOUT/operator.vhd:844]
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 2445.629 ; gain = 830.148 ; free physical = 408901 ; free virtual = 501451
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++-------------------------+-----------------------+---------------+----------------+
+|Module Name              | RTL Object            | Depth x Width | Implemented As | 
++-------------------------+-----------------------+---------------+----------------+
+|selFunction_Freq100_uid4 | Y0                    | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable28/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable27/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable26/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable25/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable24/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable23/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable22/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable21/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable20/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable19/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable18/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable17/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable16/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable15/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable14/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable13/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable12/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable11/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable10/Y0 | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable9/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable8/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable7/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable6/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable5/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable4/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable3/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable2/Y0  | 512x3         | LUT            | 
+|FloatingPointDivider     | SelFunctionTable1/Y0  | 512x3         | LUT            | 
++-------------------------+-----------------------+---------------+----------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:16 . Memory (MB): peak = 2445.629 ; gain = 830.148 ; free physical = 408887 ; free virtual = 501437
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:13 ; elapsed = 00:00:17 . Memory (MB): peak = 2445.629 ; gain = 830.148 ; free physical = 408846 ; free virtual = 501396
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+1
+INFO: [Common 17-83] Releasing license: Synthesis
+52 Infos, 46 Warnings, 1 Critical Warnings and 1 Errors encountered.
+synth_design failed
+INFO: [Common 17-344] 'source' was cancelled
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 22 21:39:14 2025...

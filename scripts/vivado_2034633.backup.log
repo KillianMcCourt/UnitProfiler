@@ -1,0 +1,1670 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Tue Apr 22 21:36:57 2025
+# Process ID: 2034633
+# Current directory: /home/kmccourt/unit_profiler/scripts
+# Command line: vivado -mode batch -source operator.tcl
+# Log file: /home/kmccourt/unit_profiler/scripts/vivado.log
+# Journal file: /home/kmccourt/unit_profiler/scripts/vivado.jou
+# Running On: ee-tik-dynamo-eda1, OS: Linux, CPU Frequency: 3600.000 MHz, CPU Physical cores: 32, Host memory: 624283 MB
+#-----------------------------------------------------------
+source operator.tcl
+# set unit_name $env(UNIT_NAME)
+# set clock_period $env(CLOCK_PERIOD)
+# set unit_dir $env(UNIT_DIR)
+# set report_dir $env(REPORT_DIR)
+# set dir_name [file tail $unit_dir]
+# puts "Processing directory: $dir_name"
+Processing directory: FloatingPointMultiplier_32_300_noIO
+# if {[regexp {FloatingPoint([A-Za-z]+)_([0-9]+)_([0-9]+)_([A-Za-z]+)} $dir_name -> operator bitwidth frequency converters]} {
+#     puts "Extracted info:"
+#     puts "  Operator: $operator"
+#     puts "  Bitwidth: $bitwidth"
+#     puts "  Frequency: ${frequency}MHz"
+#     puts "  Converters: $converters"
+# } else {
+#     puts "ERROR: Could not parse directory name format: $dir_name"
+#     exit 1
+# }
+Extracted info:
+  Operator: Multiplier
+  Bitwidth: 32
+  Frequency: 300MHz
+  Converters: noIO
+# file mkdir $report_dir/utilization
+# file mkdir $report_dir/timing
+# puts "Top module: $unit_name"
+Top module: fmul_op
+# puts "Clock period: $clock_period ns"
+Clock period: 3.33333333333333333333 ns
+# puts "Reading dependency files from ./dependencies directory..."
+Reading dependency files from ./dependencies directory...
+# set dependency_dir "../dependencies"
+# if {[file exists $dependency_dir]} {
+#     set dependency_files [glob -nocomplain "$dependency_dir/*.vhd"]
+#     if {[llength $dependency_files] > 0} {
+#         puts "Found [llength $dependency_files] dependency files"
+#         foreach dep_file $dependency_files {
+#             puts "Reading dependency file: $dep_file"
+#             read_vhdl -vhdl2008 $dep_file
+#         }
+#     } else {
+#         puts "WARNING: No dependency files found in $dependency_dir"
+#     }
+# } else {
+#     puts "WARNING: Dependencies directory not found: $dependency_dir"
+# }
+Found 12 dependency files
+Reading dependency file: ../dependencies/delay_buffer.vhd
+Reading dependency file: ../dependencies/eager_fork_register_block.vhd
+Reading dependency file: ../dependencies/flopoco_ip_cores.vhd
+Reading dependency file: ../dependencies/join.vhd
+Reading dependency file: ../dependencies/logic.vhd
+Reading dependency file: ../dependencies/mc_support.vhd
+Reading dependency file: ../dependencies/mem_to_bram.vhd
+Reading dependency file: ../dependencies/sharing_support.vhd
+Reading dependency file: ../dependencies/types.vhd
+Reading dependency file: ../dependencies/elastic_fifo_inner.vhd
+Reading dependency file: ../dependencies/merge_notehb.vhd
+Reading dependency file: ../dependencies/oehb.vhd
+# puts "Reading VHDL files from: $unit_dir"
+Reading VHDL files from: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_32_300_noIO
+# set vhdl_files [list]
+# lappend vhdl_files "$unit_dir/operator.vhd"
+# lappend vhdl_files "$unit_dir/wrapper.vhd"
+# puts "VHDL files to process: $vhdl_files"
+VHDL files to process: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_32_300_noIO/wrapper.vhd
+# foreach vhdl_file $vhdl_files {
+#     puts "Reading VHDL file: $vhdl_file"
+#     read_vhdl -vhdl2008 $vhdl_file
+# }
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_32_300_noIO/wrapper.vhd
+# puts "Synthesizing design with top module: $unit_name"
+Synthesizing design with top module: fmul_op
+# synth_design -top $unit_name -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
+Command: synth_design -top fmul_op -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7v585t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7v585t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2035392
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2029.605 ; gain = 414.652 ; free physical = 409102 ; free virtual = 501650
+---------------------------------------------------------------------------------
+CRITICAL WARNING: [Synth 8-9871] overwriting existing primary unit 'floatingpointmultiplier' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6546]
+INFO: [Synth 8-638] synthesizing module 'fmul_op' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/wrapper.vhd:33]
+INFO: [Synth 8-638] synthesizing module '\join ' [/home/kmccourt/unit_profiler/dependencies/join.vhd:18]
+	Parameter SIZE bound to: 2 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'and_n' [/home/kmccourt/unit_profiler/dependencies/logic.vhd:16]
+	Parameter SIZE bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'and_n' (0#1) [/home/kmccourt/unit_profiler/dependencies/logic.vhd:16]
+INFO: [Synth 8-256] done synthesizing module '\join ' (0#1) [/home/kmccourt/unit_profiler/dependencies/join.vhd:18]
+INFO: [Synth 8-638] synthesizing module 'delay_buffer' [/home/kmccourt/unit_profiler/dependencies/delay_buffer.vhd:16]
+	Parameter SIZE bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'delay_buffer' (0#1) [/home/kmccourt/unit_profiler/dependencies/delay_buffer.vhd:16]
+INFO: [Synth 8-638] synthesizing module 'oehb_dataless' [/home/kmccourt/unit_profiler/dependencies/oehb.vhd:17]
+INFO: [Synth 8-256] done synthesizing module 'oehb_dataless' (0#1) [/home/kmccourt/unit_profiler/dependencies/oehb.vhd:17]
+INFO: [Synth 8-638] synthesizing module 'InputIEEE_32bit' [/home/kmccourt/unit_profiler/dependencies/flopoco_ip_cores.vhd:3673]
+INFO: [Synth 8-256] done synthesizing module 'InputIEEE_32bit' (0#1) [/home/kmccourt/unit_profiler/dependencies/flopoco_ip_cores.vhd:3673]
+INFO: [Synth 8-638] synthesizing module 'OutputIEEE_32bit' [/home/kmccourt/unit_profiler/dependencies/flopoco_ip_cores.vhd:3805]
+INFO: [Synth 8-256] done synthesizing module 'OutputIEEE_32bit' (0#1) [/home/kmccourt/unit_profiler/dependencies/flopoco_ip_cores.vhd:3805]
+INFO: [Synth 8-638] synthesizing module 'FloatingPointMultiplier' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6553]
+INFO: [Synth 8-3491] module 'IntMultiplier_24x24_48_Freq300_uid5' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3554' bound to instance 'SignificandMultiplication' of component 'IntMultiplier_24x24_48_Freq300_uid5' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6615]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplier_24x24_48_Freq300_uid5' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3561]
+INFO: [Synth 8-3491] module 'DSPBlock_17x24_Freq300_uid9' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1925' bound to instance 'tile_0_mult' of component 'DSPBlock_17x24_Freq300_uid9' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4873]
+INFO: [Synth 8-638] synthesizing module 'DSPBlock_17x24_Freq300_uid9' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1932]
+INFO: [Synth 8-256] done synthesizing module 'DSPBlock_17x24_Freq300_uid9' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1932]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid11' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1962' bound to instance 'tile_1_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid11' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4923]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid11' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1969]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid11' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1969]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid13' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1999' bound to instance 'tile_2_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid13' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4934]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid13' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2006]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid15' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:22' bound to instance 'TableMult' of component 'MultTable_Freq300_uid15' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2018]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid15' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:27]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:28]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:35]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid15' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:27]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid13' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2006]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid18' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2045' bound to instance 'tile_3_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid18' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4948]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid18' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2052]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid20' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:94' bound to instance 'TableMult' of component 'MultTable_Freq300_uid20' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2064]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid20' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:99]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:100]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:107]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid20' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:99]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid18' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2052]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid23' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2091' bound to instance 'tile_4_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid23' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4962]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid23' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2098]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid23' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2098]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid25' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2128' bound to instance 'tile_5_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid25' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4973]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid25' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2135]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid27' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:166' bound to instance 'TableMult' of component 'MultTable_Freq300_uid27' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2147]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid27' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:171]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:172]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:179]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid27' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:171]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid25' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2135]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid30' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2174' bound to instance 'tile_6_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid30' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4987]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid30' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2181]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid32' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:238' bound to instance 'TableMult' of component 'MultTable_Freq300_uid32' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2193]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid32' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:243]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:244]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:251]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid32' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:243]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid30' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2181]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid35' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2220' bound to instance 'tile_7_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid35' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5001]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid35' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2227]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid35' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2227]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid37' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2257' bound to instance 'tile_8_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid37' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5012]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid37' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2264]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid39' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:310' bound to instance 'TableMult' of component 'MultTable_Freq300_uid39' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2276]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid39' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:315]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:316]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:323]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid39' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:315]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid37' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2264]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid42' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2303' bound to instance 'tile_9_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid42' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5026]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid42' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2310]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid44' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:382' bound to instance 'TableMult' of component 'MultTable_Freq300_uid44' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2322]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid44' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:387]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:388]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:395]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid44' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:387]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid42' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2310]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid47' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2349' bound to instance 'tile_10_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid47' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5040]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid47' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2356]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid47' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2356]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid49' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2386' bound to instance 'tile_11_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid49' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5051]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid49' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2393]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid51' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:454' bound to instance 'TableMult' of component 'MultTable_Freq300_uid51' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2405]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid51' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:459]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:460]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:467]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid51' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:459]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid49' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2393]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid54' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2432' bound to instance 'tile_12_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid54' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5065]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid54' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2439]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid56' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:526' bound to instance 'TableMult' of component 'MultTable_Freq300_uid56' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2451]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid56' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:531]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:532]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:539]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid56' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:531]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid54' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2439]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid59' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2478' bound to instance 'tile_13_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid59' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5079]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid59' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2485]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid59' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2485]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid61' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2515' bound to instance 'tile_14_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid61' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5090]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid61' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2522]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid63' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:598' bound to instance 'TableMult' of component 'MultTable_Freq300_uid63' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2534]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid63' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:603]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:604]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:611]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid63' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:603]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid61' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2522]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid66' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2561' bound to instance 'tile_15_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid66' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5104]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid66' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2568]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid68' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:670' bound to instance 'TableMult' of component 'MultTable_Freq300_uid68' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2580]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid68' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:675]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:676]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:683]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid68' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:675]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid66' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2568]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid71' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2607' bound to instance 'tile_16_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid71' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5118]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid71' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2614]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid71' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2614]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid73' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2644' bound to instance 'tile_17_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid73' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5129]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid73' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2651]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid75' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:742' bound to instance 'TableMult' of component 'MultTable_Freq300_uid75' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2663]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid75' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:747]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:748]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:755]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid75' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:747]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid73' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2651]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid78' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2690' bound to instance 'tile_18_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid78' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5143]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid78' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2697]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid80' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:814' bound to instance 'TableMult' of component 'MultTable_Freq300_uid80' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2709]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid80' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:819]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:820]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:827]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid80' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:819]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid78' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2697]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid83' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2736' bound to instance 'tile_19_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid83' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5157]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid83' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2743]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid83' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2743]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid85' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2773' bound to instance 'tile_20_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid85' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5168]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid85' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2780]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid87' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:886' bound to instance 'TableMult' of component 'MultTable_Freq300_uid87' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2792]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid87' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:891]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:892]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:899]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid87' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:891]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid85' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2780]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid90' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2819' bound to instance 'tile_21_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid90' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5182]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid90' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2826]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid92' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:958' bound to instance 'TableMult' of component 'MultTable_Freq300_uid92' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2838]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid92' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:963]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:964]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:971]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid92' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:963]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid90' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2826]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid95' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2865' bound to instance 'tile_22_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid95' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5196]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid95' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2872]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid95' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2872]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid97' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2902' bound to instance 'tile_23_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid97' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5207]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid97' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2909]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid99' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1030' bound to instance 'TableMult' of component 'MultTable_Freq300_uid99' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2921]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid99' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1035]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1036]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1043]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid99' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1035]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid97' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2909]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid102' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2948' bound to instance 'tile_24_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid102' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5221]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid102' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2955]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid104' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1102' bound to instance 'TableMult' of component 'MultTable_Freq300_uid104' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2967]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid104' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1107]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1108]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1115]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid104' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1107]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid102' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2955]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid107' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:2994' bound to instance 'tile_25_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid107' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5235]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid107' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3001]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid107' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3001]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid109' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3031' bound to instance 'tile_26_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid109' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5246]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid109' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3038]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid111' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1174' bound to instance 'TableMult' of component 'MultTable_Freq300_uid111' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3050]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid111' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1179]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1180]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1187]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid111' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1179]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid109' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3038]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid114' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3077' bound to instance 'tile_27_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid114' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5260]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid114' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3084]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid116' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1246' bound to instance 'TableMult' of component 'MultTable_Freq300_uid116' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3096]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid116' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1251]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1252]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1259]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid116' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1251]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid114' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3084]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid119' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3123' bound to instance 'tile_28_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid119' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5274]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid119' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3130]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid119' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3130]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid121' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3160' bound to instance 'tile_29_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid121' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5285]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid121' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3167]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid123' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1318' bound to instance 'TableMult' of component 'MultTable_Freq300_uid123' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3179]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid123' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1323]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1324]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1331]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid123' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1323]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid121' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3167]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid126' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3206' bound to instance 'tile_30_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid126' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5299]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid126' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3213]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid128' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1390' bound to instance 'TableMult' of component 'MultTable_Freq300_uid128' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3225]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid128' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1395]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1396]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1403]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid128' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1395]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid126' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3213]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid131' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3252' bound to instance 'tile_31_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid131' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5313]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid131' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3259]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid131' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3259]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid133' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3289' bound to instance 'tile_32_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid133' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5324]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid133' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3296]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid135' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1462' bound to instance 'TableMult' of component 'MultTable_Freq300_uid135' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3308]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid135' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1467]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1468]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1475]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid135' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1467]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid133' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3296]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid138' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3335' bound to instance 'tile_33_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid138' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5338]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid138' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3342]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid140' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1534' bound to instance 'TableMult' of component 'MultTable_Freq300_uid140' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3354]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid140' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1539]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1540]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1547]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid140' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1539]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid138' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3342]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_1x2_Freq300_uid143' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3381' bound to instance 'tile_34_mult' of component 'IntMultiplierLUT_1x2_Freq300_uid143' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5352]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid143' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3388]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_1x2_Freq300_uid143' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3388]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid145' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3418' bound to instance 'tile_35_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid145' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5363]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid145' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3425]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid147' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1606' bound to instance 'TableMult' of component 'MultTable_Freq300_uid147' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3437]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid147' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1611]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1612]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1619]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid147' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1611]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid145' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3425]
+INFO: [Synth 8-3491] module 'IntMultiplierLUT_3x2_Freq300_uid150' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3464' bound to instance 'tile_36_mult' of component 'IntMultiplierLUT_3x2_Freq300_uid150' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5377]
+INFO: [Synth 8-638] synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid150' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3471]
+INFO: [Synth 8-3491] module 'MultTable_Freq300_uid152' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1678' bound to instance 'TableMult' of component 'MultTable_Freq300_uid152' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3483]
+INFO: [Synth 8-638] synthesizing module 'MultTable_Freq300_uid152' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1683]
+WARNING: [Synth 8-7186] Applying attribute ram_style = "distributed" is ignored, object 'Y0' is not inferred as ram due to incorrect usage [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1684]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1691]
+INFO: [Synth 8-256] done synthesizing module 'MultTable_Freq300_uid152' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1683]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplierLUT_3x2_Freq300_uid150' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3471]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid157' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5399]
+INFO: [Synth 8-638] synthesizing module 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1756]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1762]
+INFO: [Synth 8-256] done synthesizing module 'Compressor_23_3_Freq300_uid156' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1756]
+INFO: [Synth 8-3491] module 'Compressor_3_2_Freq300_uid160' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1796' bound to instance 'Compressor_3_2_Freq300_uid160_uid161' of component 'Compressor_3_2_Freq300_uid160' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5409]
+INFO: [Synth 8-638] synthesizing module 'Compressor_3_2_Freq300_uid160' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1801]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1807]
+INFO: [Synth 8-256] done synthesizing module 'Compressor_3_2_Freq300_uid160' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1801]
+INFO: [Synth 8-3491] module 'Compressor_14_3_Freq300_uid164' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1837' bound to instance 'Compressor_14_3_Freq300_uid164_uid165' of component 'Compressor_14_3_Freq300_uid164' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5420]
+INFO: [Synth 8-638] synthesizing module 'Compressor_14_3_Freq300_uid164' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1843]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1849]
+INFO: [Synth 8-256] done synthesizing module 'Compressor_14_3_Freq300_uid164' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1843]
+INFO: [Synth 8-3491] module 'Compressor_3_2_Freq300_uid160' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1796' bound to instance 'Compressor_3_2_Freq300_uid160_uid167' of component 'Compressor_3_2_Freq300_uid160' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5430]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid171' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5440]
+INFO: [Synth 8-638] synthesizing module 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1887]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1893]
+INFO: [Synth 8-256] done synthesizing module 'Compressor_6_3_Freq300_uid170' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1887]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid173' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5450]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid175' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5460]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid177' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5470]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid179' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5480]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid181' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5490]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid183' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5500]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid185' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5510]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid187' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5520]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid189' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5530]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid191' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5540]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid193' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5550]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid195' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5560]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid197' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5570]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid199' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5580]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid201' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5590]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid203' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5600]
+INFO: [Synth 8-3491] module 'Compressor_6_3_Freq300_uid170' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1882' bound to instance 'Compressor_6_3_Freq300_uid170_uid205' of component 'Compressor_6_3_Freq300_uid170' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5610]
+INFO: [Synth 8-3491] module 'Compressor_14_3_Freq300_uid164' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1837' bound to instance 'Compressor_14_3_Freq300_uid164_uid207' of component 'Compressor_14_3_Freq300_uid164' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5621]
+INFO: [Synth 8-3491] module 'Compressor_14_3_Freq300_uid164' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1837' bound to instance 'Compressor_14_3_Freq300_uid164_uid209' of component 'Compressor_14_3_Freq300_uid164' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5633]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid211' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5645]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid213' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5657]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid215' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5669]
+INFO: [Synth 8-3491] module 'Compressor_3_2_Freq300_uid160' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1796' bound to instance 'Compressor_3_2_Freq300_uid160_uid217' of component 'Compressor_3_2_Freq300_uid160' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5679]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid219' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5690]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid221' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5702]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid223' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5714]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid225' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5726]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid227' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5738]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid229' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5750]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid231' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5762]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid233' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5774]
+INFO: [Synth 8-3491] module 'Compressor_23_3_Freq300_uid156' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1750' bound to instance 'Compressor_23_3_Freq300_uid156_uid235' of component 'Compressor_23_3_Freq300_uid156' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5786]
+INFO: [Synth 8-3491] module 'Compressor_14_3_Freq300_uid164' declared at '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:1837' bound to instance 'Compressor_14_3_Freq300_uid164_uid237' of component 'Compressor_14_3_Freq300_uid164' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:5798]
+INFO: [Common 17-14] Message 'Synth 8-3491' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-638] synthesizing module 'IntAdder_30_Freq300_uid352' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3518]
+INFO: [Synth 8-256] done synthesizing module 'IntAdder_30_Freq300_uid352' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3518]
+INFO: [Synth 8-256] done synthesizing module 'IntMultiplier_24x24_48_Freq300_uid5' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:3561]
+INFO: [Synth 8-638] synthesizing module 'IntAdder_33_Freq300_uid355' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6503]
+INFO: [Synth 8-256] done synthesizing module 'IntAdder_33_Freq300_uid355' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6503]
+INFO: [Synth 8-226] default block is never used [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6645]
+INFO: [Synth 8-256] done synthesizing module 'FloatingPointMultiplier' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6553]
+INFO: [Synth 8-256] done synthesizing module 'fmul_op' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/wrapper.vhd:33]
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid150 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid145 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid143 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid138 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid133 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid131 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid126 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid121 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid119 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid114 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid109 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid107 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid102 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid97 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid95 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid90 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid85 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid83 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid78 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid73 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid71 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid66 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid61 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid59 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid54 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid49 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid47 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid42 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid37 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid35 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid30 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid25 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid23 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid18 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_3x2_Freq300_uid13 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module IntMultiplierLUT_1x2_Freq300_uid11 is either unconnected or has no load
+WARNING: [Synth 8-7129] Port clk in module DSPBlock_17x24_Freq300_uid9 is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2122.543 ; gain = 507.590 ; free physical = 408984 ; free virtual = 501544
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2137.387 ; gain = 522.434 ; free physical = 409046 ; free virtual = 501606
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7v585tffg1157-1
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7v585tffg1157-1
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 2145.391 ; gain = 530.438 ; free physical = 409045 ; free virtual = 501605
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3936] Found unconnected internal register 'Compressor_14_3_Freq300_uid164_bh7_uid315_Out0_copy316_c1_reg' and it is trimmed from '3' to '1' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:4859]
+WARNING: [Synth 8-3936] Found unconnected internal register 'sigProdExt_c2_reg' and it is trimmed from '48' to '26' bits. [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_300_noIO/operator.vhd:6602]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 2170.312 ; gain = 555.359 ; free physical = 409005 ; free virtual = 501565
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input   33 Bit       Adders := 1     
+	   3 Input   30 Bit       Adders := 1     
+	   3 Input   10 Bit       Adders := 1     
+	   2 Input   10 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               33 Bit    Registers := 3     
+	               26 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                3 Bit    Registers := 15    
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 41    
++---Muxes : 
+	   2 Input   48 Bit        Muxes := 1     
+	   2 Input   23 Bit        Muxes := 5     
+	   2 Input    8 Bit        Muxes := 2     
+	   8 Input    3 Bit        Muxes := 72    
+	   7 Input    3 Bit        Muxes := 69    
+	   2 Input    2 Bit        Muxes := 4     
+	   4 Input    2 Bit        Muxes := 9     
+	   2 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1260 (col length:180)
+BRAMs: 1590 (col length: RAMB18 180 RAMB36 90)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+DSP Report: Generating DSP operator/SignificandMultiplication/tile_0_mult/Mfull_c0, operation Mode is: A*B.
+DSP Report: operator operator/SignificandMultiplication/tile_0_mult/Mfull_c0 is absorbed into DSP operator/SignificandMultiplication/tile_0_mult/Mfull_c0.
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408778 ; free virtual = 501339
+---------------------------------------------------------------------------------
+ Sort Area is  operator/SignificandMultiplication/tile_0_mult/Mfull_c0_0 : 0 0 : 2881 2881 : Used 1 time 0
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+ROM: Preliminary Mapping Report
++-------------------------+--------------------------------------------------------------+---------------+----------------+
+|Module Name              | RTL Object                                                   | Depth x Width | Implemented As | 
++-------------------------+--------------------------------------------------------------+---------------+----------------+
+|MultTable_Freq300_uid15  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid20  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid27  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid32  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid39  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid44  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid51  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid56  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid63  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid68  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid75  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid80  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid87  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid92  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid99  | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid104 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid111 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid116 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid123 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid128 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid135 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid140 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid147 | Y0                                                           | 32x5          | LUT            | 
+|MultTable_Freq300_uid152 | Y0                                                           | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_36_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_33_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_35_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_32_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_30_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_27_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_29_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_8_mult/TableMult/Y0  | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_5_mult/TableMult/Y0  | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_3_mult/TableMult/Y0  | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_2_mult/TableMult/Y0  | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_6_mult/TableMult/Y0  | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_11_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_9_mult/TableMult/Y0  | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_24_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_26_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_21_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_23_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_18_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_20_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_12_mult/TableMult/Y0 | 32x5          | LUT            | 
+|fmul_op                  | operator/SignificandMultiplication/tile_14_mult/TableMult/Y0 | 32x5          | LUT            | 
++-------------------------+--------------------------------------------------------------+---------------+----------------+
+
+
+DSP: Preliminary Mapping Report (see note below. The ' indicates corresponding REG is set)
++----------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name                 | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++----------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|DSPBlock_17x24_Freq300_uid9 | A*B         | 24     | 17     | -      | -      | 41     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++----------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:20 ; elapsed = 00:00:23 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408775 ; free virtual = 501335
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:20 ; elapsed = 00:00:24 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408770 ; free virtual = 501331
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408623 ; free virtual = 501185
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408622 ; free virtual = 501185
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408622 ; free virtual = 501184
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408622 ; free virtual = 501184
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408621 ; free virtual = 501184
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408621 ; free virtual = 501184
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+DSP Final Report (the ' indicates corresponding REG is set)
++----------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name                 | DSP Mapping | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++----------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|DSPBlock_17x24_Freq300_uid9 | A*B         | 24     | 17     | -      | -      | 41     | 0    | 0    | -    | -    | -     | 0    | 0    | 
++----------------------------+-------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |CARRY4  |    20|
+|2     |DSP48E1 |     1|
+|3     |LUT1    |     1|
+|4     |LUT2    |    59|
+|5     |LUT3    |   104|
+|6     |LUT4    |    99|
+|7     |LUT5    |   124|
+|8     |LUT6    |   149|
+|9     |FDRE    |   153|
++------+--------+------+
+
+Report Instance Areas: 
++------+------------------------------+------------------------------------+------+
+|      |Instance                      |Module                              |Cells |
++------+------------------------------+------------------------------------+------+
+|1     |top                           |                                    |   710|
+|2     |  buff                        |delay_buffer                        |     1|
+|3     |  oehb                        |oehb_dataless                       |     6|
+|4     |  operator                    |FloatingPointMultiplier             |   703|
+|5     |    RoundingAdder             |IntAdder_33_Freq300_uid355          |    76|
+|6     |    SignificandMultiplication |IntMultiplier_24x24_48_Freq300_uid5 |   548|
+|7     |      bitheapFinalAdd_bh7     |IntAdder_30_Freq300_uid352          |   103|
+|8     |      tile_0_mult             |DSPBlock_17x24_Freq300_uid9         |    57|
++------+------------------------------+------------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408621 ; free virtual = 501184
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 1 critical warnings and 64 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.727 ; gain = 850.773 ; free physical = 408621 ; free virtual = 501183
+Synthesis Optimization Complete : Time (s): cpu = 00:00:22 ; elapsed = 00:00:26 . Memory (MB): peak = 2465.734 ; gain = 850.773 ; free physical = 408621 ; free virtual = 501183
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2465.734 ; gain = 0.000 ; free physical = 408902 ; free virtual = 501465
+INFO: [Netlist 29-17] Analyzing 21 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2568.566 ; gain = 0.000 ; free physical = 409271 ; free virtual = 501842
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: c9933abc
+INFO: [Common 17-83] Releasing license: Synthesis
+294 Infos, 64 Warnings, 1 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:27 ; elapsed = 00:00:29 . Memory (MB): peak = 2568.602 ; gain = 974.680 ; free physical = 409263 ; free virtual = 501835
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 2029.879; main = 1813.482; forked = 436.406
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 4062.254; main = 2568.570; forked = 1627.539
+# puts "Creating clock constraint with period: $clock_period ns"
+Creating clock constraint with period: 3.33333333333333333333 ns
+# create_clock -name clk -period $clock_period [get_ports clk]
+WARNING: [Vivado 12-2489] -period contains time 3.333333 which will be rounded to 3.333 to ensure it is an integer multiple of 1 picosecond
+# puts "Setting clock source properties"
+Setting clock source properties
+# set_property HD.CLK_SRC BUFGCTRL_X0Y0 [get_ports clk]
+INFO: [Vivado 12-4761] HD.CLK_SRC property is set on port clk. The net connecting to the port drives either clock PIN or hierarchical black box. Use the create_clock constraint to create a clock on this port prior to setting HD.CLK_SRC. 
+# puts "Running optimization..."
+Running optimization...
+# opt_design
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7v585t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7v585t'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Project 1-461] DRC finished with 0 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+
+Time (s): cpu = 00:00:00.98 ; elapsed = 00:00:00.67 . Memory (MB): peak = 2632.598 ; gain = 63.996 ; free physical = 409233 ; free virtual = 501805
+
+Starting Cache Timing Information Task
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Ending Cache Timing Information Task | Checksum: 153188eca
+
+Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 2979.723 ; gain = 347.125 ; free physical = 408654 ; free virtual = 501204
+
+Starting Logic Optimization Task
+
+Phase 1 Initialization
+
+Phase 1.1 Core Generation And Design Setup
+Phase 1.1 Core Generation And Design Setup | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408267 ; free virtual = 500827
+
+Phase 1.2 Setup Constraints And Sort Netlist
+Phase 1.2 Setup Constraints And Sort Netlist | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408266 ; free virtual = 500826
+Phase 1 Initialization | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408266 ; free virtual = 500826
+
+Phase 2 Timer Update And Timing Data Collection
+
+Phase 2.1 Timer Update
+Phase 2.1 Timer Update | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.02 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408265 ; free virtual = 500825
+
+Phase 2.2 Timing Data Collection
+Phase 2.2 Timing Data Collection | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408264 ; free virtual = 500824
+Phase 2 Timer Update And Timing Data Collection | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.03 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408264 ; free virtual = 500824
+
+Phase 3 Retarget
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Opt 31-49] Retargeted 0 cell(s).
+Phase 3 Retarget | Checksum: 153188eca
+
+Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.04 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408262 ; free virtual = 500822
+Retarget | Checksum: 153188eca
+INFO: [Opt 31-389] Phase Retarget created 0 cells and removed 0 cells
+
+Phase 4 Constant propagation
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Phase 4 Constant propagation | Checksum: 137b32591
+
+Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408259 ; free virtual = 500819
+Constant propagation | Checksum: 137b32591
+INFO: [Opt 31-389] Phase Constant propagation created 0 cells and removed 0 cells
+
+Phase 5 Sweep
+Phase 5 Sweep | Checksum: 996e52fe
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3231.598 ; gain = 0.000 ; free physical = 408258 ; free virtual = 500818
+Sweep | Checksum: 996e52fe
+INFO: [Opt 31-389] Phase Sweep created 0 cells and removed 0 cells
+
+Phase 6 BUFG optimization
+Phase 6 BUFG optimization | Checksum: 996e52fe
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408258 ; free virtual = 500818
+BUFG optimization | Checksum: 996e52fe
+INFO: [Opt 31-662] Phase BUFG optimization created 0 cells of which 0 are BUFGs and removed 0 cells.
+
+Phase 7 Shift Register Optimization
+INFO: [Opt 31-1064] SRL Remap converted 0 SRLs to 0 registers and converted 0 registers of register chains to 0 SRLs
+Phase 7 Shift Register Optimization | Checksum: 996e52fe
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408262 ; free virtual = 500822
+Shift Register Optimization | Checksum: 996e52fe
+INFO: [Opt 31-389] Phase Shift Register Optimization created 0 cells and removed 0 cells
+
+Phase 8 Post Processing Netlist
+Phase 8 Post Processing Netlist | Checksum: 996e52fe
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.06 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408260 ; free virtual = 500821
+Post Processing Netlist | Checksum: 996e52fe
+INFO: [Opt 31-389] Phase Post Processing Netlist created 0 cells and removed 0 cells
+
+Phase 9 Finalization
+
+Phase 9.1 Finalizing Design Cores and Updating Shapes
+Phase 9.1 Finalizing Design Cores and Updating Shapes | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408258 ; free virtual = 500818
+
+Phase 9.2 Verifying Netlist Connectivity
+
+Starting Connectivity Check Task
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3263.613 ; gain = 0.000 ; free physical = 408258 ; free virtual = 500818
+Phase 9.2 Verifying Netlist Connectivity | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408258 ; free virtual = 500818
+Phase 9 Finalization | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408258 ; free virtual = 500818
+Opt_design Change Summary
+=========================
+
+
+-------------------------------------------------------------------------------------------------------------------------
+|  Phase                        |  #Cells created  |  #Cells Removed  |  #Constrained objects preventing optimizations  |
+-------------------------------------------------------------------------------------------------------------------------
+|  Retarget                     |               0  |               0  |                                              0  |
+|  Constant propagation         |               0  |               0  |                                              0  |
+|  Sweep                        |               0  |               0  |                                              0  |
+|  BUFG optimization            |               0  |               0  |                                              0  |
+|  Shift Register Optimization  |               0  |               0  |                                              0  |
+|  Post Processing Netlist      |               0  |               0  |                                              0  |
+-------------------------------------------------------------------------------------------------------------------------
+
+
+Ending Logic Optimization Task | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.07 . Memory (MB): peak = 3263.613 ; gain = 32.016 ; free physical = 408258 ; free virtual = 500818
+INFO: [Constraints 18-11670] Building netlist checker database with flags, 0x8
+Done building netlist checker database: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3263.613 ; gain = 0.000 ; free physical = 408258 ; free virtual = 500818
+
+Starting Power Optimization Task
+INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 2.00 ns.
+Ending Power Optimization Task | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3263.613 ; gain = 0.000 ; free physical = 408259 ; free virtual = 500819
+
+Starting Final Cleanup Task
+Ending Final Cleanup Task | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3263.613 ; gain = 0.000 ; free physical = 408259 ; free virtual = 500819
+
+Starting Netlist Obfuscation Task
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3263.613 ; gain = 0.000 ; free physical = 408258 ; free virtual = 500819
+Ending Netlist Obfuscation Task | Checksum: 9b64cfc1
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3263.613 ; gain = 0.000 ; free physical = 408258 ; free virtual = 500819
+INFO: [Common 17-83] Releasing license: Implementation
+18 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+opt_design completed successfully
+opt_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 3263.613 ; gain = 695.012 ; free physical = 408258 ; free virtual = 500819
+# puts "Running placement..."
+Running placement...
+# place_design
+Command: place_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7v585t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7v585t'
+INFO: [Common 17-83] Releasing license: Implementation
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+Running DRC as a precondition to command place_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
+
+Starting Placer Task
+
+Phase 1 Placer Initialization
+
+Phase 1.1 Placer Initialization Netlist Sorting
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3295.629 ; gain = 0.000 ; free physical = 408413 ; free virtual = 500972
+Phase 1.1 Placer Initialization Netlist Sorting | Checksum: 29bf6305
+
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 3295.629 ; gain = 0.000 ; free physical = 408413 ; free virtual = 500972
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3295.629 ; gain = 0.000 ; free physical = 408412 ; free virtual = 500971
+
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Phase 1.2 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 697d4cbc
+
+Time (s): cpu = 00:00:00.67 ; elapsed = 00:00:00.32 . Memory (MB): peak = 3295.629 ; gain = 0.000 ; free physical = 408470 ; free virtual = 501030
+
+Phase 1.3 Build Placer Netlist Model
+Phase 1.3 Build Placer Netlist Model | Checksum: 6bf6767e
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.49 . Memory (MB): peak = 3302.656 ; gain = 7.027 ; free physical = 408469 ; free virtual = 501030
+
+Phase 1.4 Constrain Clocks/Macros
+Phase 1.4 Constrain Clocks/Macros | Checksum: 6bf6767e
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.5 . Memory (MB): peak = 3302.656 ; gain = 7.027 ; free physical = 408469 ; free virtual = 501030
+Phase 1 Placer Initialization | Checksum: 6bf6767e
+
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.51 . Memory (MB): peak = 3302.656 ; gain = 7.027 ; free physical = 408469 ; free virtual = 501030
+
+Phase 2 Global Placement
+
+Phase 2.1 Floorplanning
+Phase 2.1 Floorplanning | Checksum: 69a30148
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.58 . Memory (MB): peak = 3302.656 ; gain = 7.027 ; free physical = 408461 ; free virtual = 501021
+
+Phase 2.2 Update Timing before SLR Path Opt
+Phase 2.2 Update Timing before SLR Path Opt | Checksum: 1674c1200
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.59 . Memory (MB): peak = 3302.656 ; gain = 7.027 ; free physical = 408464 ; free virtual = 501024
+
+Phase 2.3 Post-Processing in Floorplanning
+Phase 2.3 Post-Processing in Floorplanning | Checksum: 1674c1200
+
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.59 . Memory (MB): peak = 3302.656 ; gain = 7.027 ; free physical = 408464 ; free virtual = 501024
+
+Phase 2.4 Global Placement Core
+
+Phase 2.4.1 UpdateTiming Before Physical Synthesis
+Phase 2.4.1 UpdateTiming Before Physical Synthesis | Checksum: 1d0ef7c82
+
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408396 ; free virtual = 500957
+
+Phase 2.4.2 Physical Synthesis In Placer
+INFO: [Physopt 32-1035] Found 0 LUTNM shape to break, 34 LUT instances to create LUTNM shape
+INFO: [Physopt 32-1044] Break lutnm for timing: one critical 0, two critical 0, total 0, new lutff created 0
+INFO: [Physopt 32-1138] End 1 Pass. Optimized 16 nets or LUTs. Breaked 0 LUT, combined 16 existing LUTs and moved 0 existing LUT
+INFO: [Physopt 32-65] No nets found for high-fanout optimization.
+INFO: [Physopt 32-232] Optimized 0 net. Created 0 new instance.
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+INFO: [Physopt 32-670] No setup violation found.  DSP Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register to Pipeline Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  Shift Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  BRAM Register Optimization was not performed.
+INFO: [Physopt 32-670] No setup violation found.  URAM Register Optimization was not performed.
+INFO: [Physopt 32-949] No candidate nets found for dynamic/static region interface net replication
+INFO: [Physopt 32-775] End 1 Pass. Optimized 0 net or cell. Created 0 new cell, deleted 0 existing cell and moved 0 existing cell
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3310.660 ; gain = 0.000 ; free physical = 408390 ; free virtual = 500950
+
+Summary of Physical Synthesis Optimizations
+============================================
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  Optimization                                     |  Added Cells  |  Removed Cells  |  Optimized Cells/Nets  |  Dont Touch  |  Iterations  |  Elapsed   |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+|  LUT Combining                                    |            0  |             16  |                    16  |           0  |           1  |  00:00:00  |
+|  Retime                                           |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Very High Fanout                                 |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  DSP Register                                     |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register to Pipeline                       |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Shift Register                                   |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  BRAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  URAM Register                                    |            0  |              0  |                     0  |           0  |           0  |  00:00:00  |
+|  Dynamic/Static Region Interface Net Replication  |            0  |              0  |                     0  |           0  |           1  |  00:00:00  |
+|  Total                                            |            0  |             16  |                    16  |           0  |           4  |  00:00:00  |
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Phase 2.4.2 Physical Synthesis In Placer | Checksum: 21e060d3c
+
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408388 ; free virtual = 500949
+Phase 2.4 Global Placement Core | Checksum: 2107ce2b9
+
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408383 ; free virtual = 500944
+Phase 2 Global Placement | Checksum: 2107ce2b9
+
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408383 ; free virtual = 500944
+
+Phase 3 Detail Placement
+
+Phase 3.1 Commit Multi Column Macros
+Phase 3.1 Commit Multi Column Macros | Checksum: 16857a955
+
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408381 ; free virtual = 500942
+
+Phase 3.2 Commit Most Macros & LUTRAMs
+Phase 3.2 Commit Most Macros & LUTRAMs | Checksum: 23756cf50
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408380 ; free virtual = 500941
+
+Phase 3.3 Area Swap Optimization
+Phase 3.3 Area Swap Optimization | Checksum: 21ee0aca0
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408379 ; free virtual = 500940
+
+Phase 3.4 Pipeline Register Optimization
+Phase 3.4 Pipeline Register Optimization | Checksum: 1ccaf814d
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408379 ; free virtual = 500940
+
+Phase 3.5 Fast Optimization
+Phase 3.5 Fast Optimization | Checksum: 1e490ff44
+
+Time (s): cpu = 00:00:11 ; elapsed = 00:00:03 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408373 ; free virtual = 500934
+
+Phase 3.6 Small Shape Detail Placement
+Phase 3.6 Small Shape Detail Placement | Checksum: 1f7ee434a
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408352 ; free virtual = 500912
+
+Phase 3.7 Re-assign LUT pins
+Phase 3.7 Re-assign LUT pins | Checksum: 238301880
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408351 ; free virtual = 500912
+
+Phase 3.8 Pipeline Register Optimization
+Phase 3.8 Pipeline Register Optimization | Checksum: 1c5de921a
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408350 ; free virtual = 500911
+Phase 3 Detail Placement | Checksum: 1c5de921a
+
+Time (s): cpu = 00:00:12 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408350 ; free virtual = 500911
+
+Phase 4 Post Placement Optimization and Clean-Up
+
+Phase 4.1 Post Commit Optimization
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+
+Phase 4.1.1 Post Placement Optimization
+Post Placement Optimization Initialization | Checksum: 1afb4e886
+
+Phase 4.1.1.1 BUFG Insertion
+
+Starting Physical Synthesis Task
+
+Phase 1 Physical Synthesis Initialization
+INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximum of 8 CPUs
+INFO: [Physopt 32-619] Estimated Timing Summary | WNS=0.158 | TNS=0.000 |
+Phase 1 Physical Synthesis Initialization | Checksum: 1868d41a0
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3310.660 ; gain = 0.000 ; free physical = 408340 ; free virtual = 500901
+INFO: [Place 46-56] BUFG insertion identified 0 candidate nets. Inserted BUFG: 0, Replicated BUFG Driver: 0, Skipped due to Placement/Routing Conflicts: 0, Skipped due to Timing Degradation: 0, Skipped due to netlist editing failed: 0.
+Ending Physical Synthesis Task | Checksum: 1868d41a0
+
+Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.05 . Memory (MB): peak = 3310.660 ; gain = 0.000 ; free physical = 408340 ; free virtual = 500901
+Phase 4.1.1.1 BUFG Insertion | Checksum: 1afb4e886
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408339 ; free virtual = 500900
+
+Phase 4.1.1.2 Post Placement Timing Optimization
+INFO: [Place 30-746] Post Placement Timing Summary WNS=0.531. For the most accurate timing information please run report_timing.
+Phase 4.1.1.2 Post Placement Timing Optimization | Checksum: 1974db93a
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500895
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500895
+Phase 4.1 Post Commit Optimization | Checksum: 1974db93a
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500895
+
+Phase 4.2 Post Placement Cleanup
+Phase 4.2 Post Placement Cleanup | Checksum: 1974db93a
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500894
+
+Phase 4.3 Placer Reporting
+
+Phase 4.3.1 Print Estimated Congestion
+INFO: [Place 30-612] Post-Placement Estimated Congestion 
+ ____________________________________________________
+|           | Global Congestion | Short Congestion  |
+| Direction | Region Size       | Region Size       |
+|___________|___________________|___________________|
+|      North|                1x1|                1x1|
+|___________|___________________|___________________|
+|      South|                1x1|                1x1|
+|___________|___________________|___________________|
+|       East|                1x1|                1x1|
+|___________|___________________|___________________|
+|       West|                1x1|                1x1|
+|___________|___________________|___________________|
+
+Phase 4.3.1 Print Estimated Congestion | Checksum: 1974db93a
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500894
+Phase 4.3 Placer Reporting | Checksum: 1974db93a
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500894
+
+Phase 4.4 Final Placement Cleanup
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3310.660 ; gain = 0.000 ; free physical = 408334 ; free virtual = 500894
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408334 ; free virtual = 500894
+Phase 4 Post Placement Optimization and Clean-Up | Checksum: 1bd07ae52
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408333 ; free virtual = 500894
+Ending Placer Task | Checksum: 1176120ba
+
+Time (s): cpu = 00:00:13 ; elapsed = 00:00:04 . Memory (MB): peak = 3310.660 ; gain = 15.031 ; free physical = 408333 ; free virtual = 500894
+29 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
+place_design completed successfully
+# puts "Running routing..."
+Running routing...
+# route_design
+Command: route_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7v585t'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7v585t'
+Running DRC as a precondition to command route_design
+INFO: [DRC 23-27] Running DRC with 8 threads
+INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
+INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
+
+
+Starting Routing Task
+INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
+
+Phase 1 Build RT Design
+Checksum: PlaceDB: ab6e2e24 ConstDB: 0 ShapeSum: 6bf2f296 RouteDB: 0
+WARNING: [Route 35-198] Port "rhs[30]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[30]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[6]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[6]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[8]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[8]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[5]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[5]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[4]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[4]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[21]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[21]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[22]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[22]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[18]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[18]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[19]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[19]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[20]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[20]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[14]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[14]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[12]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[12]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[17]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[17]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[15]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[15]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[16]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[16]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[30]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[30]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[29]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[29]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[28]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[28]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[27]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[27]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[27]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[27]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[28]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[28]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[29]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[29]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "result_ready" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "result_ready". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs_valid" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs_valid". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs_valid" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs_valid". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rst" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rst". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[31]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[31]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[31]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[31]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[26]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[26]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[25]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[25]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[24]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[24]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[23]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[23]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[23]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[23]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[24]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[24]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[25]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[25]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "rhs[26]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "rhs[26]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[22]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[22]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[11]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[11]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[9]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[9]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[10]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[10]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[6]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[6]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[7]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[7]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[8]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[8]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[5]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[5]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[3]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[3]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[4]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[4]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[0]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[0]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[1]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[1]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[2]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[2]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[14]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[14]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[12]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[12]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[13]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[13]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[17]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[17]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[15]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[15]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[16]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[16]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[21]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[21]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[18]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[18]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[19]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[19]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Route 35-198] Port "lhs[20]" does not have an associated HD.PARTPIN_LOCS, which will prevent the partial routing of the signal "lhs[20]". Without this partial route, timing analysis to/from this port will not be accurate, and no routing information for this port can be exported.
+WARNING: [Constraints 18-8777] Unable to split tiles. All required files are not available.
+Post Restoration Checksum: NetGraph: eb626ced | NumContArr: cb892ece | Constraints: c2a8fa9d | Timing: c2a8fa9d
+Phase 1 Build RT Design | Checksum: 33c3d90f5
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:28 . Memory (MB): peak = 3566.797 ; gain = 200.109 ; free physical = 408138 ; free virtual = 500698
+
+Phase 2 Router Initialization
+
+Phase 2.1 Fix Topology Constraints
+Phase 2.1 Fix Topology Constraints | Checksum: 33c3d90f5
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:28 . Memory (MB): peak = 3566.797 ; gain = 200.109 ; free physical = 408135 ; free virtual = 500695
+
+Phase 2.2 Pre Route Cleanup
+Phase 2.2 Pre Route Cleanup | Checksum: 33c3d90f5
+
+Time (s): cpu = 00:00:45 ; elapsed = 00:00:28 . Memory (MB): peak = 3566.797 ; gain = 200.109 ; free physical = 408132 ; free virtual = 500692
+ Number of Nodes with overlaps = 0
+
+Phase 2.3 Update Timing
+Phase 2.3 Update Timing | Checksum: 23a0c8aa9
+
+Time (s): cpu = 00:00:47 ; elapsed = 00:00:29 . Memory (MB): peak = 3716.477 ; gain = 349.789 ; free physical = 407955 ; free virtual = 500508
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.562  | TNS=0.000  | WHS=-0.094 | THS=-0.372 |
+
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0 %
+  Global Horizontal Routing Utilization  = 0 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 628
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 628
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 2 Router Initialization | Checksum: 215e4672b
+
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407953 ; free virtual = 500514
+
+Phase 3 Initial Routing
+
+Phase 3.1 Global Routing
+Phase 3.1 Global Routing | Checksum: 215e4672b
+
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407953 ; free virtual = 500514
+
+Phase 3.2 Initial Net Routing
+Phase 3.2 Initial Net Routing | Checksum: 2baf1a28f
+
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407939 ; free virtual = 500500
+Phase 3 Initial Routing | Checksum: 2baf1a28f
+
+Time (s): cpu = 00:00:50 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407938 ; free virtual = 500499
+
+Phase 4 Rip-up And Reroute
+
+Phase 4.1 Global Iteration 0
+ Number of Nodes with overlaps = 54
+ Number of Nodes with overlaps = 4
+ Number of Nodes with overlaps = 1
+ Number of Nodes with overlaps = 0
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.443  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+
+Phase 4.1 Global Iteration 0 | Checksum: 26b9e33f4
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407927 ; free virtual = 500487
+Phase 4 Rip-up And Reroute | Checksum: 26b9e33f4
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407927 ; free virtual = 500487
+
+Phase 5 Delay and Skew Optimization
+
+Phase 5.1 Delay CleanUp
+Phase 5.1 Delay CleanUp | Checksum: 26b9e33f4
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407927 ; free virtual = 500487
+
+Phase 5.2 Clock Skew Optimization
+Phase 5.2 Clock Skew Optimization | Checksum: 26b9e33f4
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407927 ; free virtual = 500487
+Phase 5 Delay and Skew Optimization | Checksum: 26b9e33f4
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407927 ; free virtual = 500487
+
+Phase 6 Post Hold Fix
+
+Phase 6.1 Hold Fix Iter
+
+Phase 6.1.1 Update Timing
+Phase 6.1.1 Update Timing | Checksum: 28088b68c
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407925 ; free virtual = 500485
+INFO: [Route 35-416] Intermediate Timing Summary | WNS=0.525  | TNS=0.000  | WHS=0.095  | THS=0.000  |
+
+Phase 6.1 Hold Fix Iter | Checksum: 28088b68c
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407924 ; free virtual = 500485
+Phase 6 Post Hold Fix | Checksum: 28088b68c
+
+Time (s): cpu = 00:00:51 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407924 ; free virtual = 500485
+
+Phase 7 Route finalize
+
+Router Utilization Summary
+  Global Vertical Routing Utilization    = 0.00940351 %
+  Global Horizontal Routing Utilization  = 0.0159675 %
+  Routable Net Status*
+  *Does not include unroutable nets such as driverless and loadless.
+  Run report_route_status for detailed report.
+  Number of Failed Nets               = 0
+    (Failed Nets is the sum of unrouted and partially routed nets)
+  Number of Unrouted Nets             = 0
+  Number of Partially Routed Nets     = 0
+  Number of Node Overlaps             = 0
+
+Phase 7 Route finalize | Checksum: 28088b68c
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407921 ; free virtual = 500482
+
+Phase 8 Verifying routed nets
+
+ Verification completed successfully
+Phase 8 Verifying routed nets | Checksum: 28088b68c
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407921 ; free virtual = 500482
+
+Phase 9 Depositing Routes
+Phase 9 Depositing Routes | Checksum: 307f5e56d
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:30 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407919 ; free virtual = 500479
+
+Phase 10 Post Router Timing
+INFO: [Route 35-57] Estimated Timing Summary | WNS=0.525  | TNS=0.000  | WHS=0.095  | THS=0.000  |
+
+INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
+Phase 10 Post Router Timing | Checksum: 307f5e56d
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:31 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407917 ; free virtual = 500478
+INFO: [Route 35-16] Router Completed Successfully
+
+Phase 11 Post-Route Event Processing
+Phase 11 Post-Route Event Processing | Checksum: 18760f752
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:31 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407916 ; free virtual = 500477
+Ending Routing Task | Checksum: 18760f752
+
+Time (s): cpu = 00:00:52 ; elapsed = 00:00:31 . Memory (MB): peak = 3724.648 ; gain = 357.961 ; free physical = 407916 ; free virtual = 500477
+
+Routing Is Done.
+INFO: [Common 17-83] Releasing license: Implementation
+12 Infos, 69 Warnings, 0 Critical Warnings and 0 Errors encountered.
+route_design completed successfully
+route_design: Time (s): cpu = 00:00:53 ; elapsed = 00:00:31 . Memory (MB): peak = 3724.648 ; gain = 413.988 ; free physical = 407915 ; free virtual = 500476
+# set util_report_path "$report_dir/utilization/${unit_name}_${operator}_${frequency}MHz_${converters}.rpt"
+# set timing_report_path "$report_dir/timing/${unit_name}_${operator}_${frequency}MHz_${converters}.rpt"
+# puts "Generating utilization report: $util_report_path"
+Generating utilization report: /home/kmccourt/unit_profiler/scripts/../reports/utilization/fmul_op_Multiplier_300MHz_noIO.rpt
+# report_utilization > $util_report_path
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Tue Apr 22 21:38:27 2025
+| Host         : ee-tik-dynamo-eda1 running 64-bit AlmaLinux release 8.10 (Cerulean Leopard)
+| Command      : report_utilization
+| Design       : fmul_op
+| Device       : xc7v585tffg1157-1
+| Speed File   : -1
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Utilization Design Information
+
+Table of Contents
+-----------------
+1. Slice Logic
+1.1 Summary of Registers by Type
+2. Slice Logic Distribution
+3. Memory
+4. DSP
+5. IO and GT Specific
+6. Clocking
+7. Specific Feature
+8. Primitives
+9. Black Boxes
+10. Instantiated Netlists
+
+1. Slice Logic
+--------------
+
++-------------------------+------+-------+------------+-----------+-------+
+|        Site Type        | Used | Fixed | Prohibited | Available | Util% |
++-------------------------+------+-------+------------+-----------+-------+
+| Slice LUTs              |  395 |     0 |          0 |    364200 |  0.11 |
+|   LUT as Logic          |  395 |     0 |          0 |    364200 |  0.11 |
+|   LUT as Memory         |    0 |     0 |          0 |    111000 |  0.00 |
+| Slice Registers         |  153 |     0 |          0 |    728400 |  0.02 |
+|   Register as Flip Flop |  153 |     0 |          0 |    728400 |  0.02 |
+|   Register as Latch     |    0 |     0 |          0 |    728400 |  0.00 |
+| F7 Muxes                |    0 |     0 |          0 |    182100 |  0.00 |
+| F8 Muxes                |    0 |     0 |          0 |     91050 |  0.00 |
++-------------------------+------+-------+------------+-----------+-------+
+* Warning! LUT value is adjusted to account for LUT combining.
+
+
+1.1 Summary of Registers by Type
+--------------------------------
+
++-------+--------------+-------------+--------------+
+| Total | Clock Enable | Synchronous | Asynchronous |
++-------+--------------+-------------+--------------+
+| 0     |            _ |           - |            - |
+| 0     |            _ |           - |          Set |
+| 0     |            _ |           - |        Reset |
+| 0     |            _ |         Set |            - |
+| 0     |            _ |       Reset |            - |
+| 0     |          Yes |           - |            - |
+| 0     |          Yes |           - |          Set |
+| 0     |          Yes |           - |        Reset |
+| 0     |          Yes |         Set |            - |
+| 153   |          Yes |       Reset |            - |
++-------+--------------+-------------+--------------+
+
+
+2. Slice Logic Distribution
+---------------------------
+
++--------------------------------------------+------+-------+------------+-----------+-------+
+|                  Site Type                 | Used | Fixed | Prohibited | Available | Util% |
++--------------------------------------------+------+-------+------------+-----------+-------+
+| Slice                                      |  133 |     0 |          0 |     91050 |  0.15 |
+|   SLICEL                                   |   89 |     0 |            |           |       |
+|   SLICEM                                   |   44 |     0 |            |           |       |
+| LUT as Logic                               |  395 |     0 |          0 |    364200 |  0.11 |
+|   using O5 output only                     |    0 |       |            |           |       |
+|   using O6 output only                     |  254 |       |            |           |       |
+|   using O5 and O6                          |  141 |       |            |           |       |
+| LUT as Memory                              |    0 |     0 |          0 |    111000 |  0.00 |
+|   LUT as Distributed RAM                   |    0 |     0 |            |           |       |
+|   LUT as Shift Register                    |    0 |     0 |            |           |       |
+| Slice Registers                            |  153 |     0 |          0 |    728400 |  0.02 |
+|   Register driven from within the Slice    |  118 |       |            |           |       |
+|   Register driven from outside the Slice   |   35 |       |            |           |       |
+|     LUT in front of the register is unused |   21 |       |            |           |       |
+|     LUT in front of the register is used   |   14 |       |            |           |       |
+| Unique Control Sets                        |    2 |       |          0 |     91050 | <0.01 |
++--------------------------------------------+------+-------+------------+-----------+-------+
+* * Note: Available Control Sets calculated as Slice * 1, Review the Control Sets Report for more information regarding control sets.
+
+
+3. Memory
+---------
+
++----------------+------+-------+------------+-----------+-------+
+|    Site Type   | Used | Fixed | Prohibited | Available | Util% |
++----------------+------+-------+------------+-----------+-------+
+| Block RAM Tile |    0 |     0 |          0 |       795 |  0.00 |
+|   RAMB36/FIFO* |    0 |     0 |          0 |       795 |  0.00 |
+|   RAMB18       |    0 |     0 |          0 |      1590 |  0.00 |
++----------------+------+-------+------------+-----------+-------+
+* Note: Each Block RAM Tile only has one FIFO logic available and therefore can accommodate only one FIFO36E1 or one FIFO18E1. However, if a FIFO18E1 occupies a Block RAM Tile, that tile can still accommodate a RAMB18E1
+
+
+4. DSP
+------
+
++----------------+------+-------+------------+-----------+-------+
+|    Site Type   | Used | Fixed | Prohibited | Available | Util% |
++----------------+------+-------+------------+-----------+-------+
+| DSPs           |    1 |     0 |          0 |      1260 |  0.08 |
+|   DSP48E1 only |    1 |       |            |           |       |
++----------------+------+-------+------------+-----------+-------+
+
+
+5. IO and GT Specific
+---------------------
+
++-----------------------------+------+-------+------------+-----------+-------+
+|          Site Type          | Used | Fixed | Prohibited | Available | Util% |
++-----------------------------+------+-------+------------+-----------+-------+
+| Bonded IOB                  |    0 |     0 |          0 |       600 |  0.00 |
+| Bonded IPADs                |    0 |     0 |          0 |        62 |  0.00 |
+| Bonded OPADs                |    0 |     0 |          0 |        40 |  0.00 |
+| PHY_CONTROL                 |    0 |     0 |          0 |        18 |  0.00 |
+| PHASER_REF                  |    0 |     0 |          0 |        18 |  0.00 |
+| OUT_FIFO                    |    0 |     0 |          0 |        72 |  0.00 |
+| IN_FIFO                     |    0 |     0 |          0 |        72 |  0.00 |
+| IDELAYCTRL                  |    0 |     0 |          0 |        18 |  0.00 |
+| IBUFDS                      |    0 |     0 |          0 |       576 |  0.00 |
+| GTXE2_COMMON                |    0 |     0 |          0 |         5 |  0.00 |
+| GTXE2_CHANNEL               |    0 |     0 |          0 |        20 |  0.00 |
+| PHASER_OUT/PHASER_OUT_PHY   |    0 |     0 |          0 |        72 |  0.00 |
+| PHASER_IN/PHASER_IN_PHY     |    0 |     0 |          0 |        72 |  0.00 |
+| IDELAYE2/IDELAYE2_FINEDELAY |    0 |     0 |          0 |       900 |  0.00 |
+| ODELAYE2/ODELAYE2_FINEDELAY |    0 |     0 |          0 |       750 |  0.00 |
+| IBUFDS_GTE2                 |    0 |     0 |          0 |        10 |  0.00 |
+| ILOGIC                      |    0 |     0 |          0 |       600 |  0.00 |
+| OLOGIC                      |    0 |     0 |          0 |       600 |  0.00 |
++-----------------------------+------+-------+------------+-----------+-------+
+
+
+6. Clocking
+-----------
+
++------------+------+-------+------------+-----------+-------+
+|  Site Type | Used | Fixed | Prohibited | Available | Util% |
++------------+------+-------+------------+-----------+-------+
+| BUFGCTRL   |    0 |     0 |          0 |        32 |  0.00 |
+| BUFIO      |    0 |     0 |          0 |        72 |  0.00 |
+| MMCME2_ADV |    0 |     0 |          0 |        18 |  0.00 |
+| PLLE2_ADV  |    0 |     0 |          0 |        18 |  0.00 |
+| BUFMRCE    |    0 |     0 |          0 |        36 |  0.00 |
+| BUFHCE     |    0 |     0 |          0 |       216 |  0.00 |
+| BUFR       |    0 |     0 |          0 |        72 |  0.00 |
++------------+------+-------+------------+-----------+-------+
+
+
+7. Specific Feature
+-------------------
+
++-------------+------+-------+------------+-----------+-------+
+|  Site Type  | Used | Fixed | Prohibited | Available | Util% |
++-------------+------+-------+------------+-----------+-------+
+| BSCANE2     |    0 |     0 |          0 |         4 |  0.00 |
+| CAPTUREE2   |    0 |     0 |          0 |         1 |  0.00 |
+| DNA_PORT    |    0 |     0 |          0 |         1 |  0.00 |
+| EFUSE_USR   |    0 |     0 |          0 |         1 |  0.00 |
+| FRAME_ECCE2 |    0 |     0 |          0 |         1 |  0.00 |
+| ICAPE2      |    0 |     0 |          0 |         2 |  0.00 |
+| PCIE_2_1    |    0 |     0 |          0 |         3 |  0.00 |
+| STARTUPE2   |    0 |     0 |          0 |         1 |  0.00 |
+| XADC        |    0 |     0 |          0 |         1 |  0.00 |
++-------------+------+-------+------------+-----------+-------+
+
+
+8. Primitives
+-------------
+
++----------+------+---------------------+
+| Ref Name | Used | Functional Category |
++----------+------+---------------------+
+| FDRE     |  153 |        Flop & Latch |
+| LUT6     |  149 |                 LUT |
+| LUT5     |  124 |                 LUT |
+| LUT3     |  104 |                 LUT |
+| LUT4     |   99 |                 LUT |
+| LUT2     |   59 |                 LUT |
+| CARRY4   |   20 |          CarryLogic |
+| LUT1     |    1 |                 LUT |
+| DSP48E1  |    1 |    Block Arithmetic |
++----------+------+---------------------+
+
+
+9. Black Boxes
+--------------
+
++----------+------+
+| Ref Name | Used |
++----------+------+
+
+
+10. Instantiated Netlists
+-------------------------
+
++----------+------+
+| Ref Name | Used |
++----------+------+
+
+
+# puts "Generating timing report: $timing_report_path"
+Generating timing report: /home/kmccourt/unit_profiler/scripts/../reports/timing/fmul_op_Multiplier_300MHz_noIO.rpt
+# report_timing > $timing_report_path
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Tue Apr 22 21:38:27 2025
+| Host         : ee-tik-dynamo-eda1 running 64-bit AlmaLinux release 8.10 (Cerulean Leopard)
+| Command      : report_timing
+| Design       : fmul_op
+| Device       : 7v585t-ffg1157
+| Speed File   : -1  PRODUCTION 1.12 2014-09-11
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.524ns  (required time - arrival time)
+  Source:                 operator/SignificandMultiplication/Compressor_14_3_Freq300_uid164_bh7_uid305_Out0_copy306_c1_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Destination:            operator/sigProdExt_c2_reg[6]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.333ns  (clk rise@3.333ns - clk rise@0.000ns)
+  Data Path Delay:        2.707ns  (logic 1.040ns (38.424%)  route 1.667ns (61.576%))
+  Logic Levels:           6  (CARRY4=3 LUT3=2 LUT6=1)
+  Clock Path Skew:        -0.102ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.292ns = ( 4.625 - 3.333 ) 
+    Source Clock Delay      (SCD):    1.476ns
+    Clock Pessimism Removal (CPR):    0.082ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=152, unset)          1.476     1.476    operator/SignificandMultiplication/clk
+    SLICE_X52Y208        FDRE                                         r  operator/SignificandMultiplication/Compressor_14_3_Freq300_uid164_bh7_uid305_Out0_copy306_c1_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X52Y208        FDRE (Prop_fdre_C_Q)         0.269     1.745 r  operator/SignificandMultiplication/Compressor_14_3_Freq300_uid164_bh7_uid305_Out0_copy306_c1_reg[2]/Q
+                         net (fo=3, routed)           0.596     2.341    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_0[2]
+    SLICE_X54Y208        LUT3 (Prop_lut3_I0_O)        0.053     2.394 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_i_2/O
+                         net (fo=2, routed)           0.358     2.753    operator/SignificandMultiplication/bitheapFinalAdd_bh7/Compressor_23_3_Freq300_uid156_uid341/R0__0[0]
+    SLICE_X55Y207        LUT6 (Prop_lut6_I0_O)        0.053     2.806 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_i_6/O
+                         net (fo=1, routed)           0.000     2.806    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_i_6_n_0
+    SLICE_X55Y207        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.313     3.119 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4/CO[3]
+                         net (fo=1, routed)           0.000     3.119    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_n_0
+    SLICE_X55Y208        CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058     3.177 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__5/CO[3]
+                         net (fo=1, routed)           0.000     3.177    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__5_n_0
+    SLICE_X55Y209        CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.139     3.316 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__6/O[0]
+                         net (fo=53, routed)          0.712     4.028    operator/SignificandMultiplication/bitheapFinalAdd_bh7/sigProd_c1__0[47]
+    SLICE_X61Y206        LUT3 (Prop_lut3_I1_O)        0.155     4.183 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/sigProdExt_c2[6]_i_1/O
+                         net (fo=1, routed)           0.000     4.183    operator/SignificandMultiplication_n_19
+    SLICE_X61Y206        FDRE                                         r  operator/sigProdExt_c2_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        3.333     3.333 r  
+                                                      0.000     3.333 r  clk (IN)
+                         net (fo=152, unset)          1.292     4.625    operator/clk
+    SLICE_X61Y206        FDRE                                         r  operator/sigProdExt_c2_reg[6]/C
+                         clock pessimism              0.082     4.707    
+                         clock uncertainty           -0.035     4.672    
+    SLICE_X61Y206        FDRE (Setup_fdre_C_D)        0.035     4.707    operator/sigProdExt_c2_reg[6]
+  -------------------------------------------------------------------
+                         required time                          4.707    
+                         arrival time                          -4.183    
+  -------------------------------------------------------------------
+                         slack                                  0.524    
+
+
+
+
+# set wns [get_property SLACK [get_timing_paths -max_paths 1 -nworst 1 -setup]]
+# puts "Worst Negative Slack (WNS): $wns ns"
+Worst Negative Slack (WNS): 0.524 ns
+# set timing_file [open $timing_report_path "a"]
+# puts $timing_file "\nClock Frequency: ${frequency} MHz"
+# puts $timing_file "Clock Period: ${clock_period} ns"
+# puts $timing_file "Worst Negative Slack (WNS): ${wns} ns"
+# close $timing_file
+# puts "Implementation complete for $unit_name ($operator ${frequency}MHz)"
+Implementation complete for fmul_op (Multiplier 300MHz)
+INFO: [Common 17-206] Exiting Vivado at Tue Apr 22 21:38:27 2025...

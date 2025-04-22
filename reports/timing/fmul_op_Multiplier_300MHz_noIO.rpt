@@ -1,0 +1,84 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Tue Apr 22 21:38:27 2025
+| Host         : ee-tik-dynamo-eda1 running 64-bit AlmaLinux release 8.10 (Cerulean Leopard)
+| Command      : report_timing
+| Design       : fmul_op
+| Device       : 7v585t-ffg1157
+| Speed File   : -1  PRODUCTION 1.12 2014-09-11
+| Design State : Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.524ns  (required time - arrival time)
+  Source:                 operator/SignificandMultiplication/Compressor_14_3_Freq300_uid164_bh7_uid305_Out0_copy306_c1_reg[2]/C
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Destination:            operator/sigProdExt_c2_reg[6]/D
+                            (rising edge-triggered cell FDRE clocked by clk  {rise@0.000ns fall@1.666ns period=3.333ns})
+  Path Group:             clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            3.333ns  (clk rise@3.333ns - clk rise@0.000ns)
+  Data Path Delay:        2.707ns  (logic 1.040ns (38.424%)  route 1.667ns (61.576%))
+  Logic Levels:           6  (CARRY4=3 LUT3=2 LUT6=1)
+  Clock Path Skew:        -0.102ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.292ns = ( 4.625 - 3.333 ) 
+    Source Clock Delay      (SCD):    1.476ns
+    Clock Pessimism Removal (CPR):    0.082ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk rise edge)        0.000     0.000 r  
+                                                      0.000     0.000 r  clk (IN)
+                         net (fo=152, unset)          1.476     1.476    operator/SignificandMultiplication/clk
+    SLICE_X52Y208        FDRE                                         r  operator/SignificandMultiplication/Compressor_14_3_Freq300_uid164_bh7_uid305_Out0_copy306_c1_reg[2]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X52Y208        FDRE (Prop_fdre_C_Q)         0.269     1.745 r  operator/SignificandMultiplication/Compressor_14_3_Freq300_uid164_bh7_uid305_Out0_copy306_c1_reg[2]/Q
+                         net (fo=3, routed)           0.596     2.341    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_0[2]
+    SLICE_X54Y208        LUT3 (Prop_lut3_I0_O)        0.053     2.394 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_i_2/O
+                         net (fo=2, routed)           0.358     2.753    operator/SignificandMultiplication/bitheapFinalAdd_bh7/Compressor_23_3_Freq300_uid156_uid341/R0__0[0]
+    SLICE_X55Y207        LUT6 (Prop_lut6_I0_O)        0.053     2.806 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_i_6/O
+                         net (fo=1, routed)           0.000     2.806    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_i_6_n_0
+    SLICE_X55Y207        CARRY4 (Prop_carry4_S[0]_CO[3])
+                                                      0.313     3.119 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4/CO[3]
+                         net (fo=1, routed)           0.000     3.119    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__4_n_0
+    SLICE_X55Y208        CARRY4 (Prop_carry4_CI_CO[3])
+                                                      0.058     3.177 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__5/CO[3]
+                         net (fo=1, routed)           0.000     3.177    operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__5_n_0
+    SLICE_X55Y209        CARRY4 (Prop_carry4_CI_O[0])
+                                                      0.139     3.316 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/plusOp__0_carry__6/O[0]
+                         net (fo=53, routed)          0.712     4.028    operator/SignificandMultiplication/bitheapFinalAdd_bh7/sigProd_c1__0[47]
+    SLICE_X61Y206        LUT3 (Prop_lut3_I1_O)        0.155     4.183 r  operator/SignificandMultiplication/bitheapFinalAdd_bh7/sigProdExt_c2[6]_i_1/O
+                         net (fo=1, routed)           0.000     4.183    operator/SignificandMultiplication_n_19
+    SLICE_X61Y206        FDRE                                         r  operator/sigProdExt_c2_reg[6]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk rise edge)        3.333     3.333 r  
+                                                      0.000     3.333 r  clk (IN)
+                         net (fo=152, unset)          1.292     4.625    operator/clk
+    SLICE_X61Y206        FDRE                                         r  operator/sigProdExt_c2_reg[6]/C
+                         clock pessimism              0.082     4.707    
+                         clock uncertainty           -0.035     4.672    
+    SLICE_X61Y206        FDRE (Setup_fdre_C_D)        0.035     4.707    operator/sigProdExt_c2_reg[6]
+  -------------------------------------------------------------------
+                         required time                          4.707    
+                         arrival time                          -4.183    
+  -------------------------------------------------------------------
+                         slack                                  0.524    
+
+
+
+
+
+Clock Frequency: 300 MHz
+Clock Period: 3.33333333333333333333 ns
+Worst Negative Slack (WNS): 0.524 ns
