@@ -1,5 +1,5 @@
 #!/bin/bash
-# Debugged runner.sh - With enhanced verbosity for troubleshooting
+# Debugged runner.sh - With enhanced verbosity for troubleshooting and pipeline depth extraction
 
 echo "=== FPGA Implementation Script for Floating Point Units ==="
 echo "Starting in directory: $(pwd)"
@@ -27,7 +27,7 @@ find "${GENERATED_UNITS_DIR}" -type d -maxdepth 1 | sort
 
 # Get a list of all unit directories
 echo "Searching for FloatingPoint* directories..."
-unit_dirs=$(find "${GENERATED_UNITS_DIR}" -type d -name "FloatingPoint*")
+unit_dirs=$(find "${GENERATED_UNITS_DIR}" -type d -name "FloatingPoint*" | grep "noIO" | grep -E "Adder|Multiplier|Divider")
 unit_count=$(echo "$unit_dirs" | grep -v "^$" | wc -l)
 
 echo "Found $unit_count unit directories matching 'FloatingPoint*' pattern."
@@ -39,10 +39,32 @@ if [ $unit_count -eq 0 ]; then
     exit 1
 fi
 
-# Create the CSV header
+# Create the CSV header with new max_latency and real delay fields
 csv_file="../reports/area_timing_summary.csv"
-echo "Operator,Bitwidth,Frequency_MHz,Converters,Slack_ns,LUTs,Registers,DSPs,BRAMs,SRLs" > $csv_file
+echo "Operator,Bitwidth,Frequency_MHz,clock_period,Converters,Slack_ns,LUTs,Registers,DSPs,BRAMs,SRLs,max_latency,Real_Required_Clock_Period_ns" > $csv_file
 echo "Created CSV report file: $csv_file"
+
+# Function to extract maximum pipeline depth from operator.vhd
+extract_max_pipeline_depth() {
+    local vhd_file="$1"
+    local max_depth=0
+    
+    echo "    Extracting pipeline depths from: $vhd_file" >&2
+    
+    # Find all lines containing "Pipeline depth:" and extract the numeric values
+    while IFS= read -r line; do
+        if [[ $line =~ --[[:space:]]*Pipeline[[:space:]]+depth:[[:space:]]*([0-9]+)[[:space:]]*cycles? ]]; then
+            depth="${BASH_REMATCH[1]}"
+            echo "    Found pipeline depth: $depth cycles" >&2
+            if [ "$depth" -gt "$max_depth" ]; then
+                max_depth="$depth"
+            fi
+        fi
+    done < "$vhd_file"
+    
+    echo "    Maximum pipeline depth found: $max_depth cycles" >&2
+    echo "$max_depth"
+}
 
 # Process each unit directory
 unit_index=1
@@ -100,6 +122,11 @@ echo "$unit_dirs" | while read unit_dir; do
             continue
         fi
         
+        # Extract maximum pipeline depth from operator.vhd
+        echo "  Extracting pipeline depth information..."
+        max_latency=$(extract_max_pipeline_depth "$unit_dir/operator.vhd")
+        echo "  Maximum latency found: $max_latency cycles"
+        
         # Run Vivado with the appropriate environment variables
         echo "  Running Vivado synthesis and implementation..."
         export UNIT_NAME=$top_module
@@ -115,9 +142,9 @@ echo "$unit_dirs" | while read unit_dir; do
         popd > /dev/null
         
         # Check if report files exist
-	util_report="../reports/utilization/${top_module}_${operator}_${frequency}MHz_${converters}.rpt"
-	timing_report="../reports/timing/${top_module}_${operator}_${frequency}MHz_${converters}.rpt"
-		
+        util_report="../reports/utilization/${top_module}_${operator}_${frequency}MHz_${converters}.rpt"
+        timing_report="../reports/timing/${top_module}_${operator}_${frequency}MHz_${converters}.rpt"
+        
         if [[ ! -f "$util_report" || ! -f "$timing_report" ]]; then
             echo "  WARNING: Expected report files not found!"
             echo "  Utilization report should be: $util_report"
@@ -147,10 +174,21 @@ echo "$unit_dirs" | while read unit_dir; do
         [ -z "$dsps" ] && dsps=0
         [ -z "$brams" ] && brams=0
         [ -z "$srls" ] && srls=0
+        [ -z "$max_latency" ] && max_latency=0
+        [ -z "$slack" ] && slack=0
         
-        # Add to CSV
-        echo "$operator,$bitwidth,$frequency,$converters,$slack,$luts,$regs,$dsps,$brams,$srls" >> $csv_file
-        echo "  Data added to CSV report"
+        # Calculate real required clock period
+        # Real period = clock_period - slack
+        if [ -n "$slack" ] && [ -n "$clock_period" ]; then
+            real_required_period=$(echo "$clock_period - ($slack)" | bc -l)
+        else
+            real_required_period="N/A"
+        fi
+        echo "  Real required clock period: $real_required_period ns (clock_period: $clock_period ns - slack: $slack ns)"
+        
+        # Add to CSV with new max_latency and real delay fields
+        echo "$operator,$bitwidth,$frequency,$clock_period,$converters,$slack,$luts,$regs,$dsps,$brams,$srls,$max_latency,$real_required_period" >> $csv_file
+        echo "  Data added to CSV report (max_latency: $max_latency cycles, real_required_period: $real_required_period ns)"
     else
         echo "  ERROR: Could not parse directory name format: $dir_name"
     fi

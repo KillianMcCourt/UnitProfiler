@@ -61,7 +61,7 @@ foreach vhdl_file $vhdl_files {
 
 # Synthesize the design with the selected unit as the top-level module
 puts "Synthesizing design with top module: $unit_name"
-synth_design -top $unit_name -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
+synth_design -top $unit_name -part xc7k160tfbg484-1 -no_iobuf -mode out_of_context
 
 # Create the clock constraint
 puts "Creating clock constraint with period: $clock_period ns"

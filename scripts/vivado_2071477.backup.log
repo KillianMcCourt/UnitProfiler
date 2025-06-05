@@ -3,8 +3,8 @@
 # SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Tue Apr 22 21:39:28 2025
-# Process ID: 2063316
+# Start of session at: Thu Jun  5 20:14:40 2025
+# Process ID: 2071477
 # Current directory: /home/kmccourt/unit_profiler/scripts
 # Command line: vivado -mode batch -source operator.tcl
 # Log file: /home/kmccourt/unit_profiler/scripts/vivado.log
@@ -18,7 +18,7 @@ source operator.tcl
 # set report_dir $env(REPORT_DIR)
 # set dir_name [file tail $unit_dir]
 # puts "Processing directory: $dir_name"
-Processing directory: FloatingPointMultiplier_64_100_noINOUT
+Processing directory: FloatingPointAdder_32_100_noIO
 # if {[regexp {FloatingPoint([A-Za-z]+)_([0-9]+)_([0-9]+)_([A-Za-z]+)} $dir_name -> operator bitwidth frequency converters]} {
 #     puts "Extracted info:"
 #     puts "  Operator: $operator"
@@ -30,14 +30,14 @@ Processing directory: FloatingPointMultiplier_64_100_noINOUT
 #     exit 1
 # }
 Extracted info:
-  Operator: Multiplier
-  Bitwidth: 64
+  Operator: Adder
+  Bitwidth: 32
   Frequency: 100MHz
-  Converters: noINOUT
+  Converters: noIO
 # file mkdir $report_dir/utilization
 # file mkdir $report_dir/timing
 # puts "Top module: $unit_name"
-Top module: fmul_op
+Top module: fadd_op
 # puts "Clock period: $clock_period ns"
 Clock period: 10.00000000000000000000 ns
 # puts "Reading dependency files from ./dependencies directory..."
@@ -71,44 +71,44 @@ Reading dependency file: ../dependencies/elastic_fifo_inner.vhd
 Reading dependency file: ../dependencies/merge_notehb.vhd
 Reading dependency file: ../dependencies/oehb.vhd
 # puts "Reading VHDL files from: $unit_dir"
-Reading VHDL files from: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_64_100_noINOUT
+Reading VHDL files from: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointAdder_32_100_noIO
 # set vhdl_files [list]
 # lappend vhdl_files "$unit_dir/operator.vhd"
 # lappend vhdl_files "$unit_dir/wrapper.vhd"
 # puts "VHDL files to process: $vhdl_files"
-VHDL files to process: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_64_100_noINOUT/operator.vhd /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd
+VHDL files to process: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointAdder_32_100_noIO/operator.vhd /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd
 # foreach vhdl_file $vhdl_files {
 #     puts "Reading VHDL file: $vhdl_file"
 #     read_vhdl -vhdl2008 $vhdl_file
 # }
-Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_64_100_noINOUT/operator.vhd
-Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointAdder_32_100_noIO/operator.vhd
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd
 # puts "Synthesizing design with top module: $unit_name"
-Synthesizing design with top module: fmul_op
-# synth_design -top $unit_name -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
-Command: synth_design -top fmul_op -part xc7v585tffg1157-1 -no_iobuf -mode out_of_context
+Synthesizing design with top module: fadd_op
+# synth_design -top $unit_name -part xc7k160tfbg484-1 -no_iobuf -mode out_of_context
+Command: synth_design -top fadd_op -part xc7k160tfbg484-1 -no_iobuf -mode out_of_context
 Starting synth_design
-Attempting to get a license for feature 'Synthesis' and/or device 'xc7v585t'
-INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7v585t'
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k160t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k160t'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 2063352
+INFO: [Synth 8-7075] Helper process launched with PID 2071509
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2033.195 ; gain = 417.652 ; free physical = 409473 ; free virtual = 502043
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2016.543 ; gain = 416.566 ; free physical = 354268 ; free virtual = 357695
 ---------------------------------------------------------------------------------
-CRITICAL WARNING: [Synth 8-9871] overwriting existing primary unit 'floatingpointmultiplier' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/operator.vhd:15350]
-ERROR: [Synth 8-36] 'join_valid' is not declared [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd:61]
-ERROR: [Synth 8-9114] actual of formal out port 'outs_valid' cannot be an expression [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd:61]
-INFO: [Synth 8-11252] unit 'arch' is ignored due to previous errors [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd:97]
-INFO: [Synth 8-10443] VHDL file '/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd' is ignored due to errors
-INFO: [Synth 8-638] synthesizing module 'fmul_op' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd:9]
-INFO: [Synth 8-256] done synthesizing module 'fmul_op' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_64_100_noINOUT/wrapper.vhd:9]
+CRITICAL WARNING: [Synth 8-9871] overwriting existing primary unit 'floatingpointadder' [/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/operator.vhd:246]
+ERROR: [Synth 8-36] 'join_valid' is not declared [/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd:61]
+ERROR: [Synth 8-9114] actual of formal out port 'outs_valid' cannot be an expression [/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd:61]
+INFO: [Synth 8-11252] unit 'arch' is ignored due to previous errors [/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd:112]
+INFO: [Synth 8-10443] VHDL file '/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd' is ignored due to errors
+INFO: [Synth 8-638] synthesizing module 'fadd_op' [/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd:9]
+INFO: [Synth 8-256] done synthesizing module 'fadd_op' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointAdder_32_100_noIO/wrapper.vhd:9]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2122.164 ; gain = 506.621 ; free physical = 409351 ; free virtual = 501921
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2100.480 ; gain = 500.504 ; free physical = 354147 ; free virtual = 357574
 ---------------------------------------------------------------------------------
 synthesize failed
 INFO: [Common 17-83] Releasing license: Synthesis
 9 Infos, 0 Warnings, 1 Critical Warnings and 3 Errors encountered.
 synth_design failed
 ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
-INFO: [Common 17-206] Exiting Vivado at Tue Apr 22 21:39:42 2025...
+INFO: [Common 17-206] Exiting Vivado at Thu Jun  5 20:14:57 2025...
