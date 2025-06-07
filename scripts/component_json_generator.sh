@@ -34,28 +34,56 @@ with csv_path.open('r') as f:
 
         component_key = operator_to_component[operator]
         bitwidth = row['Bitwidth']
-        period = row['Real_Required_Clock_Period_ns']
+        period = float(row['Real_Required_Clock_Period_ns'])
         latency = float(row['max_latency'])
 
         latency_data[component_key][bitwidth][period] = latency
 
-# Update JSON with new latency data, sorted by latency ascending
+# Pareto filter: keep only points not dominated by others (lower period and lower latency)
+def pareto_filter(period_latency_dict):
+    # Sort by period ascending, then latency ascending
+    items = sorted(period_latency_dict.items())
+    pareto = {}
+    min_latency = float('inf')
+    for period, latency in items:
+        if latency < min_latency:
+            pareto[period] = latency
+            min_latency = latency
+    return pareto
+
+# Update JSON with new latency data, sorted and pareto-optimal only
 for component_key, bitwidth_data in latency_data.items():
     if component_key not in components:
         continue
 
-    # Clear existing latency block
     components[component_key]['latency'] = {}
 
     for bitwidth, period_data in bitwidth_data.items():
-        # Sort by latency ascending
-        sorted_period_data = dict(
-            sorted(period_data.items(), key=lambda item: item[1])
-        )
-        components[component_key]['latency'][bitwidth] = sorted_period_data
+        pareto_period_data = pareto_filter(period_data)
+        # Convert periods back to string for JSON keys, always 6 decimal places
+        components[component_key]['latency'][bitwidth] = {
+            f"{period:.6f}": pareto_period_data[period] for period in sorted(pareto_period_data)
+        }
 
-# Write updated JSON
+# Write updated JSON with 6 decimal places for floats
+class SixDecimalEncoder(json.JSONEncoder):
+    def iterencode(self, o, _one_shot=False):
+        for s in super().iterencode(o, _one_shot=_one_shot):
+            yield s
+
+    def encode(self, o):
+        def float_format(obj):
+            if isinstance(obj, float):
+                return format(obj, ".6f")
+            elif isinstance(obj, dict):
+                return {k: float_format(v) for k, v in obj.items()}
+            elif isinstance(obj, list):
+                return [float_format(i) for i in obj]
+            else:
+                return obj
+        return super().encode(float_format(o))
+
 with output_path.open('w') as f:
-    json.dump(components, f, indent=2)
+    json.dump(components, f, indent=2, cls=SixDecimalEncoder)
 
-print("Latency data updated and sorted successfully.")
+print("Latency data updated and Pareto-optimal points only, with 6 decimal places.")
