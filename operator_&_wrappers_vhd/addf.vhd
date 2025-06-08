@@ -23,7 +23,7 @@ entity addf is
   );
 end entity;
 
-architecture arch_64_2_705000 of fadd_op is
+architecture arch_64_2_705000 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -99,7 +99,7 @@ architecture arch_64_2_705000 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_64_2_705000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -119,7 +119,7 @@ architecture arch_64_2_705000 of fadd_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_5_091333 of fadd_op is
+architecture arch_64_5_091333 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -195,7 +195,7 @@ architecture arch_64_5_091333 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_64_5_091333(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -210,7 +210,7 @@ architecture arch_64_5_091333 of fadd_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_9_068000 of fadd_op is
+architecture arch_64_9_068000 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -286,7 +286,7 @@ architecture arch_64_9_068000 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_64_9_068000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -296,7 +296,7 @@ architecture arch_64_9_068000 of fadd_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_2_798000 of fadd_op is
+architecture arch_32_2_798000 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -372,7 +372,7 @@ architecture arch_32_2_798000 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_32_2_798000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -416,7 +416,7 @@ architecture arch_32_2_798000 of fadd_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_2_922000 of fadd_op is
+architecture arch_32_2_922000 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -492,7 +492,7 @@ architecture arch_32_2_922000 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_32_2_922000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -510,7 +510,7 @@ architecture arch_32_2_922000 of fadd_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_3_649333 of fadd_op is
+architecture arch_32_3_649333 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -586,7 +586,7 @@ architecture arch_32_3_649333 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_32_3_649333(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -600,7 +600,7 @@ architecture arch_32_3_649333 of fadd_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_9_068000 of fadd_op is
+architecture arch_32_9_068000 of addf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -671,7 +671,7 @@ architecture arch_32_9_068000 of fadd_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointAdder__(arch)
+        operator : entity work.FloatingPointAdder_32_9_068000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,

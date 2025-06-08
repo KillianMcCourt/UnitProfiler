@@ -52,13 +52,42 @@ copy_unit_dir() {
 
 # 4. Append wrapper arch to operator VHDL and entity/arch to flopoco_ip_cores.vhd
 append_arch_and_entity() {
+ local op="$1"
+local bitwidth="$2"
+local delay="$3"
+local wrapper_dir="$4"
+local opfile="$OPS_DIR/${op}.vhd"
+local delay_underscore="${delay//./_}"
+local arch_name="arch_${bitwidth}_${delay_underscore}"
+# Determine the main operator VHDL entity name
+case "$op" in
+addf) main_entity="FloatingPointAdder" ;;
+mulf) main_entity="FloatingPointMultiplier" ;;
+divf) main_entity="FloatingPointDivider" ;;
+esac
+# Append architecture to operator file (entity must be addf/mulf/divf)
+awk -v arch="$arch_name" -v op="$op" -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
+ BEGIN{flag=0}
+ /^architecture /{flag=1}
+ flag{
+ # Replace architecture name and entity name in arch header
+ if ($0 ~ /^architecture[ \t]+arch[ \t]+of[ \t]+/) {
+ sub(/^architecture[ \t]+arch[ \t]+of[ \t]+[A-Za-z0-9_]+/, "architecture " arch " of " op)
+ }
+ # Replace the main operator instantiation with suffixed version
+ gsub("entity work\\." main_entity "\\(", "entity work." main_entity "_" bw "_" dly "(")
+ print
+ }
+ /end architecture;/{flag=0}
+ ' "$wrapper_dir/wrapper.vhd" >> "$opfile"
+}
+
+append_operator_vhd_to_flopoco() {
     local op="$1"
     local bitwidth="$2"
     local delay="$3"
     local wrapper_dir="$4"
-    local opfile="$OPS_DIR/${op}.vhd"
     local delay_underscore="${delay//./_}"
-    local arch_name="arch_${bitwidth}_${delay_underscore}"
 
     # Determine the main operator VHDL entity name
     case "$op" in
@@ -67,25 +96,36 @@ append_arch_and_entity() {
         divf) main_entity="FloatingPointDivider" ;;
     esac
 
-    # Append architecture to operator file (only rename the main operator entity)
-    awk -v arch="$arch_name" -v main_entity="$main_entity" -v op="$op" -v bw="$bitwidth" -v dly="$delay_underscore" '
-        BEGIN{flag=0}
-        /^architecture /{flag=1}
-        flag{print}
-        /end architecture;/{flag=0}
-    ' "$wrapper_dir/wrapper.vhd" | \
-    sed "s/architecture arch/architecture $arch_name/" | \
-    sed "s/entity work\.$main_entity/entity work.${main_entity}_${bw}_${dly}/g" >> "$opfile"
+    local op_vhd="$wrapper_dir/operator.vhd"
+    if [[ ! -f "$op_vhd" ]]; then
+        echo "Warning: $op_vhd not found, skipping."
+        return
+    fi
 
-    # Append entity+arch to flopoco_ip_cores.vhd (only rename the main operator entity)
-    awk -v main_entity="$main_entity" -v op="$op" -v bw="$bitwidth" -v dly="$delay_underscore" '
-        /^entity /{flag=1}
-        flag{print}
-        /end architecture;/{flag=0}
-    ' "$wrapper_dir/wrapper.vhd" | \
-    sed "s/entity $main_entity/entity ${main_entity}_${bw}_${dly}/" | \
-    sed "s/architecture arch/architecture arch/" >> "$FLOPOCO_VHD"
+    # Copy the full code, renaming both entity and architecture
+awk -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
+    BEGIN { renamed_entity=0; new_entity_name=main_entity }
+    /^entity[ \t]+/ {
+        if ($2 == main_entity && !renamed_entity) {
+            new_entity_name = main_entity "_" bw "_" dly
+            print "entity " new_entity_name " is"
+            renamed_entity=1
+            next
+        }
+    }
+    /^architecture[ \t]+/ {
+        if ($4 == main_entity && renamed_entity) {
+            print "architecture " $2 " of " new_entity_name " is"
+            next
+        }
+    }
+    { print }
+' "$op_vhd" >> "$FLOPOCO_VHD"
+
+
+    echo "" >> "$FLOPOCO_VHD"
 }
+
 # Write entity header for each operator
 write_entity_header() {
     local op="$1"
@@ -138,6 +178,7 @@ for op in addf mulf divf; do
             dir=$(copy_unit_dir "$csv_op" "$bitwidth" "$freq")
             if [ -n "$dir" ]; then
                 append_arch_and_entity "$op" "$bitwidth" "$delay" "$dir"
+                append_operator_vhd_to_flopoco "$op" "$bitwidth" "$delay" "$dir"
             fi
         fi
     done < <(extract_latencies "$op")

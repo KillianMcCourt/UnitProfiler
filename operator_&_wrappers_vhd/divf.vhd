@@ -23,7 +23,7 @@ entity divf is
   );
 end entity;
 
-architecture arch_64_4_345000 of fdiv_op is
+architecture arch_64_4_345000 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -99,7 +99,7 @@ architecture arch_64_4_345000 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_64_4_345000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -170,7 +170,7 @@ architecture arch_64_4_345000 of fdiv_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_4_398000 of fdiv_op is
+architecture arch_64_4_398000 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -246,7 +246,7 @@ architecture arch_64_4_398000 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_64_4_398000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -290,7 +290,7 @@ architecture arch_64_4_398000 of fdiv_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_6_859333 of fdiv_op is
+architecture arch_64_6_859333 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -366,7 +366,7 @@ architecture arch_64_6_859333 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_64_6_859333(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -394,7 +394,7 @@ architecture arch_64_6_859333 of fdiv_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_16_008000 of fdiv_op is
+architecture arch_64_16_008000 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -470,7 +470,7 @@ architecture arch_64_16_008000 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_64_16_008000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -484,7 +484,7 @@ architecture arch_64_16_008000 of fdiv_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_3_812000 of fdiv_op is
+architecture arch_32_3_812000 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -560,7 +560,7 @@ architecture arch_32_3_812000 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_32_3_812000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -583,7 +583,7 @@ architecture arch_32_3_812000 of fdiv_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_6_629333 of fdiv_op is
+architecture arch_32_6_629333 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -659,7 +659,7 @@ architecture arch_32_6_629333 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_32_6_629333(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -676,7 +676,7 @@ architecture arch_32_6_629333 of fdiv_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_14_152000 of fdiv_op is
+architecture arch_32_14_152000 of divf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -752,7 +752,7 @@ architecture arch_32_14_152000 of fdiv_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointDivider__(arch)
+        operator : entity work.FloatingPointDivider_32_14_152000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,

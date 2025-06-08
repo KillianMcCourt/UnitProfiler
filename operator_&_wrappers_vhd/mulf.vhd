@@ -23,7 +23,7 @@ entity mulf is
   );
 end entity;
 
-architecture arch_32_2_034000 of fmul_op is
+architecture arch_32_2_034000 of mulf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -99,7 +99,7 @@ architecture arch_32_2_034000 of fmul_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointMultiplier__(arch)
+        operator : entity work.FloatingPointMultiplier_32_2_034000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -133,7 +133,7 @@ architecture arch_32_2_034000 of fmul_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_2_783000 of fmul_op is
+architecture arch_32_2_783000 of mulf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -209,7 +209,7 @@ architecture arch_32_2_783000 of fmul_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointMultiplier__(arch)
+        operator : entity work.FloatingPointMultiplier_32_2_783000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -221,7 +221,7 @@ architecture arch_32_2_783000 of fmul_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_32_2_875333 of fmul_op is
+architecture arch_32_2_875333 of mulf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -297,7 +297,7 @@ architecture arch_32_2_875333 of fmul_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointMultiplier__(arch)
+        operator : entity work.FloatingPointMultiplier_32_2_875333(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -307,7 +307,7 @@ architecture arch_32_2_875333 of fmul_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_2_046000 of fmul_op is
+architecture arch_64_2_046000 of mulf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -383,7 +383,7 @@ architecture arch_64_2_046000 of fmul_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointMultiplier__(arch)
+        operator : entity work.FloatingPointMultiplier_64_2_046000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -447,7 +447,7 @@ architecture arch_64_2_046000 of fmul_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_2_758000 of fmul_op is
+architecture arch_64_2_758000 of mulf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -523,7 +523,7 @@ architecture arch_64_2_758000 of fmul_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointMultiplier__(arch)
+        operator : entity work.FloatingPointMultiplier_64_2_758000(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
@@ -537,7 +537,7 @@ architecture arch_64_2_758000 of fmul_op is
             R     => ip_result
         );
 end architecture;
-architecture arch_64_4_242333 of fmul_op is
+architecture arch_64_4_242333 of mulf is
     
     
     -- legacy comment : main_component went here in component based version
@@ -613,7 +613,7 @@ architecture arch_64_4_242333 of fmul_op is
                     R => result
                 );
 
-        operator : entity work.FloatingPointMultiplier__(arch)
+        operator : entity work.FloatingPointMultiplier_64_4_242333(arch)
         port map (
             clk   => clk,
             ce_1 => oehb_ready,
