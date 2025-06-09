@@ -142,8 +142,8 @@ echo "$unit_dirs" | while read unit_dir; do
         popd > /dev/null
         
         # Check if report files exist
-        util_report="../reports/utilization/${top_module}_${operator}_${frequency}MHz_${converters}.rpt"
-        timing_report="../reports/timing/${top_module}_${operator}_${frequency}MHz_${converters}.rpt"
+        util_report="../reports/utilization/${top_module}_${operator}_${bitwidth}_${frequency}MHz_${converters}.rpt"
+        timing_report="../reports/timing/${top_module}_${operator}_${bitwidth}_${frequency}MHz_${converters}.rpt"
         
         if [[ ! -f "$util_report" || ! -f "$timing_report" ]]; then
             echo "  WARNING: Expected report files not found!"
@@ -162,11 +162,11 @@ echo "$unit_dirs" | while read unit_dir; do
         fi
         
         # Extract area information from utilization file
-        luts=$(grep -A 5 "CLB Logic" "$util_report" | grep "LUT as Logic" | grep -oP "[0-9]+" | head -1)
-        regs=$(grep -A 3 "Register as" "$util_report" | grep "Register as Flip Flop" | grep -oP "[0-9]+" | head -1)
-        dsps=$(grep -A 2 "DSP" "$util_report" | grep "DSPs" | grep -oP "[0-9]+" | head -1)
-        brams=$(grep -A 2 "BLOCKRAM" "$util_report" | grep "Block RAM Tile" | grep -oP "[0-9]+" | head -1)
-        srls=$(grep "LUT as Memory" "$util_report" | grep -oP "[0-9]+" | head -1)
+        luts=$(grep "LUT as Logic" "$util_report" | awk -F'|' '{print $3}' | tr -d ' ' | head -1)
+        regs=$(grep "Register as Flip Flop" "$util_report" | awk -F'|' '{print $3}' | tr -d ' ' | head -1)
+        dsps=$(grep "DSPs" "$util_report" | awk -F'|' '{print $3}' | tr -d ' ' | head -1)
+        brams=$(grep "Block RAM Tile" "$util_report" | awk -F'|' '{print $3}' | tr -d ' ' | head -1)
+        srls=$(grep "LUT as Memory" "$util_report" | awk -F'|' '{print $3}' | tr -d ' ' | head -1)
         
         # Set defaults for empty values
         [ -z "$luts" ] && luts=0

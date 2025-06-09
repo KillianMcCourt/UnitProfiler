@@ -80,8 +80,8 @@ puts "Running routing..."
 route_design
 
 # Generate reports
-set util_report_path "$report_dir/utilization/${unit_name}_${operator}_${frequency}MHz_${converters}.rpt"
-set timing_report_path "$report_dir/timing/${unit_name}_${operator}_${frequency}MHz_${converters}.rpt"
+set util_report_path "$report_dir/utilization/${unit_name}_${operator}_${bitwidth}_${frequency}MHz_${converters}.rpt"
+set timing_report_path "$report_dir/timing/${unit_name}_${operator}_${bitwidth}_${frequency}MHz_${converters}.rpt"
 
 puts "Generating utilization report: $util_report_path"
 report_utilization > $util_report_path
