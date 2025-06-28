@@ -60,12 +60,12 @@ append_arch_and_entity() {
  local delay_underscore="${delay//./_}"
  local arch_name="arch_${bitwidth}_${delay_underscore}"
  # Determine the main operator VHDL entity name
- case "$op" in
- addf) main_entity="FloatingPointAdder" ;;
- mulf) main_entity="FloatingPointMultiplier" ;;
- divf) main_entity="FloatingPointDivider" ;;
- esac
- # Append architecture to operator file (entity must be addf/mulf/divf)
+main_entity=$(awk -F',' -v op="$op" '$1==op {print $3}' operator_mappings.csv)
+if [ -z "$main_entity" ]; then
+    echo "Unknown operator: $op"
+    exit 1
+fi
+ # Append architecture to operator file (entity must bein the mappsing)
  awk -v arch="$arch_name" -v op="$op" -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
   BEGIN{flag=0}
   /^architecture /{flag=1}
@@ -93,11 +93,11 @@ append_operator_vhd_to_flopoco() {
     local delay_underscore="${delay//./_}"
 
     # Determine the main operator VHDL entity name
-    case "$op" in
-        addf) main_entity="FloatingPointAdder" ;;
-        mulf) main_entity="FloatingPointMultiplier" ;;
-        divf) main_entity="FloatingPointDivider" ;;
-    esac
+main_entity=$(awk -F',' -v op="$op" '$1==op {print $3}' operator_mappings.csv)
+if [ -z "$main_entity" ]; then
+    echo "Unknown operator: $op"
+    exit 1
+fi
 
     local op_vhd="$wrapper_dir/operator.vhd"
     if [[ ! -f "$op_vhd" ]]; then
@@ -168,13 +168,13 @@ EOF
 
 # Main loop
 : > "$FLOPOCO_VHD"
-for op in addf mulf divf; do
-    # Map to CSV operator names
-    case $op in
-        addf) csv_op="Adder" ;;
-        mulf) csv_op="Multiplier" ;;
-        divf) csv_op="Divider" ;;
-    esac
+awk -F',' 'NR>1 {print $1}' operator_mappings.csv | while read -r op; do
+    csv_op=$(awk -F',' -v op="$op" '$1==op {print $2}' operator_mappings.csv)
+    if [ -z "$csv_op" ]; then
+        echo "Unknown operator: $op"
+        continue
+    fi
+
 
     opfile="$OPS_DIR/${op}.vhd"
     write_entity_header "$op"

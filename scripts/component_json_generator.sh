@@ -10,13 +10,15 @@ component_json_path = Path('../component_json/base_component.json')
 csv_path = Path('../reports/area_timing_summary.csv')
 output_path = component_json_path  # overwrite in place
 
-# Mapping from CSV Operator to JSON component key
-operator_to_component = {
-    'Multiplier': 'handshake.mulf',
-    'Adder': 'handshake.addf',
-    'Divider': 'handshake.divf'
-    # Add more mappings if needed
-}
+# Mapping from CSV Operator to JSON component key : probably could be automated to handshake.ThreeFirstLettersf, but for now the granular control is more convenient
+
+
+operator_to_component = {}
+with open('operator_mappings.csv') as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        operator_to_component[row['csv_op']] = row['component']
+
 
 # Load JSON
 with component_json_path.open('r') as f:
@@ -80,9 +82,7 @@ class SixDecimalEncoder(json.JSONEncoder):
             elif isinstance(obj, list):
                 return [float_format(i) for i in obj]
             else:
-                return obj
-        return super().encode(float_format(o))
-
+                return objey
 with output_path.open('w') as f:
     json.dump(components, f, indent=2, cls=SixDecimalEncoder)
 

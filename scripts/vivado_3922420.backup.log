@@ -1,0 +1,114 @@
+#-----------------------------------------------------------
+# Vivado v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Sat Jun 28 17:11:20 2025
+# Process ID: 3922420
+# Current directory: /home/kmccourt/unit_profiler/scripts
+# Command line: vivado -mode batch -source operator.tcl
+# Log file: /home/kmccourt/unit_profiler/scripts/vivado.log
+# Journal file: /home/kmccourt/unit_profiler/scripts/vivado.jou
+# Running On: ee-tik-dynamo-eda1, OS: Linux, CPU Frequency: 3599.998 MHz, CPU Physical cores: 32, Host memory: 624283 MB
+#-----------------------------------------------------------
+source operator.tcl
+# set unit_name $env(UNIT_NAME)
+# set clock_period $env(CLOCK_PERIOD)
+# set unit_dir $env(UNIT_DIR)
+# set report_dir $env(REPORT_DIR)
+# set dir_name [file tail $unit_dir]
+# puts "Processing directory: $dir_name"
+Processing directory: FloatingPointSubtractor_32_100_noIO
+# if {[regexp {FloatingPoint([A-Za-z]+)_([0-9]+)_([0-9]+)_([A-Za-z]+)} $dir_name -> operator bitwidth frequency converters]} {
+#     puts "Extracted info:"
+#     puts "  Operator: $operator"
+#     puts "  Bitwidth: $bitwidth"
+#     puts "  Frequency: ${frequency}MHz"
+#     puts "  Converters: $converters"
+# } else {
+#     puts "ERROR: Could not parse directory name format: $dir_name"
+#     exit 1
+# }
+Extracted info:
+  Operator: Subtractor
+  Bitwidth: 32
+  Frequency: 100MHz
+  Converters: noIO
+# file mkdir $report_dir/utilization
+# file mkdir $report_dir/timing
+# puts "Top module: $unit_name"
+Top module: fsub_op
+# puts "Clock period: $clock_period ns"
+Clock period: 10.00000000000000000000 ns
+# puts "Reading dependency files from ./dependencies directory..."
+Reading dependency files from ./dependencies directory...
+# set dependency_dir "../dependencies"
+# if {[file exists $dependency_dir]} {
+#     set dependency_files [glob -nocomplain "$dependency_dir/*.vhd"]
+#     if {[llength $dependency_files] > 0} {
+#         puts "Found [llength $dependency_files] dependency files"
+#         foreach dep_file $dependency_files {
+#             puts "Reading dependency file: $dep_file"
+#             read_vhdl -vhdl2008 $dep_file
+#         }
+#     } else {
+#         puts "WARNING: No dependency files found in $dependency_dir"
+#     }
+# } else {
+#     puts "WARNING: Dependencies directory not found: $dependency_dir"
+# }
+Found 13 dependency files
+Reading dependency file: ../dependencies/delay_buffer.vhd
+Reading dependency file: ../dependencies/eager_fork_register_block.vhd
+Reading dependency file: ../dependencies/flopoco_ip_cores.vhd
+Reading dependency file: ../dependencies/join.vhd
+Reading dependency file: ../dependencies/logic.vhd
+Reading dependency file: ../dependencies/mc_support.vhd
+Reading dependency file: ../dependencies/mem_to_bram.vhd
+Reading dependency file: ../dependencies/sharing_support.vhd
+Reading dependency file: ../dependencies/types.vhd
+Reading dependency file: ../dependencies/elastic_fifo_inner.vhd
+Reading dependency file: ../dependencies/merge_notehb.vhd
+Reading dependency file: ../dependencies/oehb.vhd
+Reading dependency file: ../dependencies/flipmsb.vhd
+# puts "Reading VHDL files from: $unit_dir"
+Reading VHDL files from: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointSubtractor_32_100_noIO
+# set vhdl_files [list]
+# lappend vhdl_files "$unit_dir/operator.vhd"
+# lappend vhdl_files "$unit_dir/wrapper.vhd"
+# puts "VHDL files to process: $vhdl_files"
+VHDL files to process: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointSubtractor_32_100_noIO/operator.vhd /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd
+# foreach vhdl_file $vhdl_files {
+#     puts "Reading VHDL file: $vhdl_file"
+#     read_vhdl -vhdl2008 $vhdl_file
+# }
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointSubtractor_32_100_noIO/operator.vhd
+Reading VHDL file: /home/kmccourt/unit_profiler/scripts/../generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd
+# puts "Synthesizing design with top module: $unit_name"
+Synthesizing design with top module: fsub_op
+# synth_design -top $unit_name -part xc7k160tfbg484-1 -no_iobuf -mode out_of_context
+Command: synth_design -top fsub_op -part xc7k160tfbg484-1 -no_iobuf -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k160t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k160t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 3923289
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2017.344 ; gain = 417.566 ; free physical = 306953 ; free virtual = 549269
+---------------------------------------------------------------------------------
+ERROR: [Synth 8-36] 'join_valid' is not declared [/home/kmccourt/unit_profiler/generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd:63]
+ERROR: [Synth 8-9114] actual of formal out port 'outs_valid' cannot be an expression [/home/kmccourt/unit_profiler/generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd:63]
+INFO: [Synth 8-11252] unit 'arch' is ignored due to previous errors [/home/kmccourt/unit_profiler/generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd:118]
+INFO: [Synth 8-10443] VHDL file '/home/kmccourt/unit_profiler/generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd' is ignored due to errors
+INFO: [Synth 8-638] synthesizing module 'fsub_op' [/home/kmccourt/unit_profiler/generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd:9]
+INFO: [Synth 8-256] done synthesizing module 'fsub_op' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointSubtractor_32_100_noIO/wrapper.vhd:9]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2100.312 ; gain = 500.535 ; free physical = 305375 ; free virtual = 547700
+---------------------------------------------------------------------------------
+synthesize failed
+INFO: [Common 17-83] Releasing license: Synthesis
+9 Infos, 0 Warnings, 0 Critical Warnings and 3 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
+INFO: [Common 17-206] Exiting Vivado at Sat Jun 28 17:11:38 2025...

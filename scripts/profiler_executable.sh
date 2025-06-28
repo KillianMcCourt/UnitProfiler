@@ -27,7 +27,8 @@ find "${GENERATED_UNITS_DIR}" -type d -maxdepth 1 | sort
 
 # Get a list of all unit directories
 echo "Searching for FloatingPoint* directories..."
-unit_dirs=$(find "${GENERATED_UNITS_DIR}" -type d -name "FloatingPoint*" | grep "noIO" | grep -E "Adder|Multiplier|Divider")
+ops_regex=$(awk -F',' 'NR>1 {print $2}' operator_mappings.csv | paste -sd '|' -)
+unit_dirs=$(find "${GENERATED_UNITS_DIR}" -type d -name "FloatingPoint*" | grep "noIO" | grep -E "$ops_regex")
 unit_count=$(echo "$unit_dirs" | grep -v "^$" | wc -l)
 
 echo "Found $unit_count unit directories matching 'FloatingPoint*' pattern."
@@ -96,21 +97,12 @@ echo "$unit_dirs" | while read unit_dir; do
         echo "  Clock period: $clock_period ns"
         
         # Determine top module name based on operator
-        case "$operator" in
-            Adder)
-                top_module="fadd_op"
-                ;;
-            Multiplier)
-                top_module="fmul_op"
-                ;;
-            Divider)
-                top_module="fdiv_op"
-                ;;
-            *)
-                echo "  Skipping unknown operator type: $operator"
-                continue
-                ;;
-        esac
+    top_module=$(awk -F',' -v operator="$operator" '$2==operator {print $4}' operator_mappings.csv)
+    if [ -z "$top_module" ]; then
+        echo "  Skipping unknown operator type: $operator"
+        continue
+    fi
+
         
         echo "  Using top module: $top_module"
         
