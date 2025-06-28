@@ -53,32 +53,35 @@ copy_unit_dir() {
 # 4. Append wrapper arch to operator VHDL and entity/arch to flopoco_ip_cores.vhd
 append_arch_and_entity() {
  local op="$1"
-local bitwidth="$2"
-local delay="$3"
-local wrapper_dir="$4"
-local opfile="$OPS_DIR/${op}.vhd"
-local delay_underscore="${delay//./_}"
-local arch_name="arch_${bitwidth}_${delay_underscore}"
-# Determine the main operator VHDL entity name
-case "$op" in
-addf) main_entity="FloatingPointAdder" ;;
-mulf) main_entity="FloatingPointMultiplier" ;;
-divf) main_entity="FloatingPointDivider" ;;
-esac
-# Append architecture to operator file (entity must be addf/mulf/divf)
-awk -v arch="$arch_name" -v op="$op" -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
- BEGIN{flag=0}
- /^architecture /{flag=1}
- flag{
- # Replace architecture name and entity name in arch header
- if ($0 ~ /^architecture[ \t]+arch[ \t]+of[ \t]+/) {
- sub(/^architecture[ \t]+arch[ \t]+of[ \t]+[A-Za-z0-9_]+/, "architecture " arch " of " op)
- }
- # Replace the main operator instantiation with suffixed version
- gsub("entity work\\." main_entity "\\(", "entity work." main_entity "_" bw "_" dly "(")
- print
- }
- /end architecture;/{flag=0}
+ local bitwidth="$2"
+ local delay="$3"
+ local wrapper_dir="$4"
+ local opfile="$OPS_DIR/${op}.vhd"
+ local delay_underscore="${delay//./_}"
+ local arch_name="arch_${bitwidth}_${delay_underscore}"
+ # Determine the main operator VHDL entity name
+ case "$op" in
+ addf) main_entity="FloatingPointAdder" ;;
+ mulf) main_entity="FloatingPointMultiplier" ;;
+ divf) main_entity="FloatingPointDivider" ;;
+ esac
+ # Append architecture to operator file (entity must be addf/mulf/divf)
+ awk -v arch="$arch_name" -v op="$op" -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
+  BEGIN{flag=0}
+  /^architecture /{flag=1}
+  flag{
+    # Replace architecture name and entity name in arch header
+    if ($0 ~ /^architecture[ \t]+arch[ \t]+of[ \t]+/) {
+      sub(/^architecture[ \t]+arch[ \t]+of[ \t]+[A-Za-z0-9_]+/, "architecture " arch " of " op)
+    }
+    # Replace the main operator instantiation with suffixed version
+    gsub("entity work\\." main_entity "\\(", "entity work." main_entity "_" bw "_" dly "(")
+    # Enhanced FreqXXX pattern handling: insert _delay right after the number
+    # This handles cases like Freq300, Freq300_uid4, Freq300*something, etc.
+    gsub(/Freq[0-9]+/, "&_" dly)
+    print
+  }
+  /end architecture;/{flag=0}
  ' "$wrapper_dir/wrapper.vhd" >> "$opfile"
 }
 
@@ -102,26 +105,30 @@ append_operator_vhd_to_flopoco() {
         return
     fi
 
-    # Copy the full code, renaming both entity and architecture
-awk -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
-    BEGIN { renamed_entity=0; new_entity_name=main_entity }
-    /^entity[ \t]+/ {
-        if ($2 == main_entity && !renamed_entity) {
-            new_entity_name = main_entity "_" bw "_" dly
-            print "entity " new_entity_name " is"
-            renamed_entity=1
-            next
+    # Copy the full code, renaming both entity and architecture, and append _<delay> after FreqXXX
+    awk -v main_entity="$main_entity" -v bw="$bitwidth" -v dly="$delay_underscore" '
+        BEGIN { renamed_entity=0; new_entity_name=main_entity }
+        /^entity[ \t]+/ {
+            if ($2 == main_entity && !renamed_entity) {
+                new_entity_name = main_entity "_" bw "_" dly
+                print "entity " new_entity_name " is"
+                renamed_entity=1
+                next
+            }
         }
-    }
-    /^architecture[ \t]+/ {
-        if ($4 == main_entity && renamed_entity) {
-            print "architecture " $2 " of " new_entity_name " is"
-            next
+        /^architecture[ \t]+/ {
+            if ($4 == main_entity && renamed_entity) {
+                print "architecture " $2 " of " new_entity_name " is"
+                next
+            }
         }
-    }
-    { print }
-' "$op_vhd" >> "$FLOPOCO_VHD"
-
+        {
+            # Enhanced FreqXXX pattern handling: insert _delay right after the number
+            # This handles cases like Freq300, Freq300_uid4, Freq300*something, etc.
+            gsub(/Freq[0-9]+/, "&_" dly)
+            print
+        }
+    ' "$op_vhd" >> "$FLOPOCO_VHD"
 
     echo "" >> "$FLOPOCO_VHD"
 }

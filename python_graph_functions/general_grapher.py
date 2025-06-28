@@ -5,17 +5,24 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-def load_and_process_data():
+def get_reports_dir():
+    """Prompt user to choose reports directory."""
+    while True:
+        choice = input("Choose reports directory ([1] reports, [2] reports_vivado): ").strip()
+        if choice == "1":
+            return "reports"
+        elif choice == "2":
+            return "reports_vivado"
+        else:
+            print("Invalid choice. Please enter 1 or 2.")
+
+def load_and_process_data(reports_dir):
     """Load the CSV data and process it for graphing"""
-    # Read the CSV file
-    df = pd.read_csv('../reports/area_timing_summary.csv')
-    
-    # Create a combined operator-bitwidth identifier
+    df = pd.read_csv(f'../{reports_dir}/area_timing_summary.csv')
     df['Op_Bitwidth'] = df['Operator'] + '_' + df['Bitwidth'].astype(str)
-    
     return df
 
-def create_latency_vs_clock_period_graphs(df):
+def create_latency_vs_clock_period_graphs(df, reports_dir):
     """Create graphs of required clock period vs latency for each (operator, bitwidth) pair"""
     # Get unique operator-bitwidth combinations
     op_bitwidth_pairs = df['Op_Bitwidth'].unique()
@@ -69,12 +76,12 @@ def create_latency_vs_clock_period_graphs(df):
                  fontsize=14, y=1.02)
     
     # Save the figure
-    output_dir = Path('../reports/graphs')
+    output_dir = Path(f'../{reports_dir}/graphs')
     output_dir.mkdir(exist_ok=True)
     plt.savefig(output_dir / 'latency_vs_clock_period.png', dpi=300, bbox_inches='tight')
     print(f"Saved latency vs clock period graph to: {output_dir / 'latency_vs_clock_period.png'}")
 
-def create_individual_hw_resource_graphs(df, resource_type, resource_column):
+def create_individual_hw_resource_graphs(df, resource_type, resource_column, reports_dir):
     """Create graphs for a specific hardware resource type"""
     # Get unique operator-bitwidth combinations
     op_bitwidth_pairs = df['Op_Bitwidth'].unique()
@@ -146,13 +153,13 @@ def create_individual_hw_resource_graphs(df, resource_type, resource_column):
                  fontsize=14, y=1.02)
     
     # Save the figure
-    output_dir = Path('../reports/graphs')
+    output_dir = Path(f'../{reports_dir}/graphs')
     output_dir.mkdir(exist_ok=True)
     filename = f'{resource_type.lower()}_vs_clock_period.png'
     plt.savefig(output_dir / filename, dpi=300, bbox_inches='tight')
     print(f"Saved {resource_type} vs clock period graph to: {output_dir / filename}")
 
-def create_all_hw_resource_graphs(df):
+def create_all_hw_resource_graphs(df, reports_dir):
     """Create separate graphs for each hardware resource type"""
     # Define the hardware resource types and their corresponding columns
     resource_types = {
@@ -165,7 +172,7 @@ def create_all_hw_resource_graphs(df):
     
     for resource_name, column_name in resource_types.items():
         print(f"Creating {resource_name} vs clock period graphs...")
-        create_individual_hw_resource_graphs(df, resource_name, column_name)
+        create_individual_hw_resource_graphs(df, resource_name, column_name, reports_dir)
 
 def create_resource_utilization_summary(df):
     """Create a summary showing which operators use which resources"""
@@ -190,8 +197,9 @@ def create_resource_utilization_summary(df):
 
 def main():
     """Main function to run the analysis"""
+    reports_dir = get_reports_dir()
     print("Loading and processing area timing data...")
-    df = load_and_process_data()
+    df = load_and_process_data(reports_dir)
     
     print(f"Loaded {len(df)} data points")
     print(f"Found {len(df['Op_Bitwidth'].unique())} unique (Operator, Bitwidth) pairs:")
@@ -204,10 +212,10 @@ def main():
     print()
     
     print("Creating latency vs clock period graphs...")
-    create_latency_vs_clock_period_graphs(df)
+    create_latency_vs_clock_period_graphs(df, reports_dir)
     
     print("Creating individual hardware resource vs clock period graphs...")
-    create_all_hw_resource_graphs(df)
+    create_all_hw_resource_graphs(df, reports_dir)
     
     print("Analysis complete!")
 

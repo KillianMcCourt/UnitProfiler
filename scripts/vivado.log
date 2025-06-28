@@ -3,13 +3,13 @@
 # SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Mon Jun  9 18:21:05 2025
-# Process ID: 687843
+# Start of session at: Wed Jun 25 13:49:45 2025
+# Process ID: 2259303
 # Current directory: /home/kmccourt/unit_profiler/scripts
 # Command line: vivado -mode batch -source operator.tcl
 # Log file: /home/kmccourt/unit_profiler/scripts/vivado.log
 # Journal file: /home/kmccourt/unit_profiler/scripts/vivado.jou
-# Running On: ee-tik-dynamo-eda1, OS: Linux, CPU Frequency: 3600.000 MHz, CPU Physical cores: 32, Host memory: 624283 MB
+# Running On: ee-tik-dynamo-eda1, OS: Linux, CPU Frequency: 3599.998 MHz, CPU Physical cores: 32, Host memory: 624283 MB
 #-----------------------------------------------------------
 source operator.tcl
 # set unit_name $env(UNIT_NAME)
@@ -92,9 +92,9 @@ Attempting to get a license for feature 'Synthesis' and/or device 'xc7k160t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k160t'
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 687893
+INFO: [Synth 8-7075] Helper process launched with PID 2259526
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2017.516 ; gain = 417.512 ; free physical = 26403 ; free virtual = 142699
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 2017.543 ; gain = 417.449 ; free physical = 364303 ; free virtual = 563337
 ---------------------------------------------------------------------------------
 CRITICAL WARNING: [Synth 8-9871] overwriting existing primary unit 'floatingpointmultiplier' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_100_noIO/operator.vhd:6260]
 ERROR: [Synth 8-36] 'join_valid' is not declared [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_100_noIO/wrapper.vhd:61]
@@ -104,11 +104,11 @@ INFO: [Synth 8-10443] VHDL file '/home/kmccourt/unit_profiler/generated_units/Fl
 INFO: [Synth 8-638] synthesizing module 'fmul_op' [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_100_noIO/wrapper.vhd:9]
 INFO: [Synth 8-256] done synthesizing module 'fmul_op' (0#1) [/home/kmccourt/unit_profiler/generated_units/FloatingPointMultiplier_32_100_noIO/wrapper.vhd:9]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 2103.453 ; gain = 503.449 ; free physical = 26451 ; free virtual = 142748
+Finished Synthesize : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 2103.480 ; gain = 503.387 ; free physical = 364202 ; free virtual = 563236
 ---------------------------------------------------------------------------------
 synthesize failed
 INFO: [Common 17-83] Releasing license: Synthesis
 9 Infos, 0 Warnings, 1 Critical Warnings and 3 Errors encountered.
 synth_design failed
 ERROR: [Common 17-69] Command failed: Vivado Synthesis failed
-INFO: [Common 17-206] Exiting Vivado at Mon Jun  9 18:21:25 2025...
+INFO: [Common 17-206] Exiting Vivado at Wed Jun 25 13:50:03 2025...
