@@ -154,10 +154,10 @@ echo "$unit_dirs" | while read unit_dir; do
         fi
         
         # Extract area information from utilization file
-        luts=$(grep -A 5 "CLB Logic" "$util_report" | grep "LUT as Logic" | grep -oP "[0-9]+" | head -1)
+        luts=$(grep -A 5 "Slice LUTs" "$util_report" | grep "LUT as Logic" | grep -oP "[0-9]+" | head -1)
         regs=$(grep -A 3 "Register as" "$util_report" | grep "Register as Flip Flop" | grep -oP "[0-9]+" | head -1)
         dsps=$(grep -A 2 "DSP" "$util_report" | grep "DSPs" | grep -oP "[0-9]+" | head -1)
-        brams=$(grep -A 2 "BLOCKRAM" "$util_report" | grep "Block RAM Tile" | grep -oP "[0-9]+" | head -1)
+        brams=$(grep -A 2 "Block RAM Tile" "$util_report" | grep "Block RAM Tile" | grep -oP "[0-9]+" | head -1)
         srls=$(grep "LUT as Memory" "$util_report" | grep -oP "[0-9]+" | head -1)
         
         # Set defaults for empty values
